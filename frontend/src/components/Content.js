@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Button} from 'material-ui';
+import {Button, Typography} from 'material-ui';
 
 class Content extends PureComponent {
   static propTypes = {
@@ -14,9 +14,8 @@ class Content extends PureComponent {
   render() {
     return (
       <div className={this.props.className}>
-        <Button variant="raised" color="secondary">
-          Click me!
-        </Button>
+        <Typography variant="headline">Bienvenue sur Redline !</Typography>
+        <Typography variant="subheading">Coming soon...</Typography>
       </div>
     )
   }
