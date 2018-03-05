@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Typography} from 'material-ui';
+import {Typography} from 'material-ui';
 
 class Content extends PureComponent {
   static propTypes = {
