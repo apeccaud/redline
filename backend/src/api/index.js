@@ -15,20 +15,6 @@ const router = new Router();
  */
 router.get('/', (req, res) => res.send('Hello, World!'));
 
-/**
- * @api {get} /:name Say hello to a specific name
- * @apiName GetName
- * @apiGroup Static Pages
- * @apiDescription Cette URL affiche un message Hello personnalisé
- *
- * @apiParam  {String} name Nom de la personne à saluer
- * @apiParamExample  {String} Request-Example:
-     name: Nymous
- *
- * @apiSuccessExample {html} Success-Response:
-     HTTP/1.1 200 OK
-     Hello, Nymous!
- */
-router.get('/:name', (req, res) => res.send(`Hello, ${req.params.name}!`));
+router.use('/users', require('./users'));
 
 module.exports = router;

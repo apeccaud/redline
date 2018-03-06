@@ -7,6 +7,9 @@ const config = require('./config');
 const app = express();
 const server = require('http').Server(app);
 
+require('./config/mongoose');
+require('./config/express')(app);
+
 app.use('/api', require('./api'));
 
 app.use(serveStatic('./public'));
