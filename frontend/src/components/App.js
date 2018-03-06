@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import './App.css';
 import theme from '../theme';
 import GlobalAppBar from './GlobalAppBar';
-import TabBar from './TabBar'
 import Content from './Content';
 
 const styles = theme => ({
@@ -37,7 +36,6 @@ class App extends Component {
         <MuiThemeProvider theme={theme}>
           <Reboot/>
           <GlobalAppBar appTitle="Redline" hasTabBarBelow/>
-          <TabBar/>
           {/* You should work mainly in the Content component */}
           <Content className={classes.content}/>
         </MuiThemeProvider>

@@ -1,6 +1,32 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Typography} from 'material-ui';
+import {Typography, Switch, AppBar} from 'material-ui';
+
+class ToggleBar extends PureComponent {
+    static propTypes = {
+        classes: PropTypes.object.isRequired
+    };
+
+    state = {
+        checked: true
+    };
+
+    handleChange = (event, value) => {
+        this.setState({checked: value});
+    };
+
+    render() {
+        return (
+            <AppBar position="static">
+                <Switch
+                    checked={this.state.checked}
+                    onChange={this.handleChange}
+                    fullWidth
+                />
+            </AppBar>
+        );
+    }
+}
 
 class Content extends PureComponent {
   static propTypes = {
@@ -13,10 +39,14 @@ class Content extends PureComponent {
 
   render() {
     return (
-      <div className={this.props.className}>
-        <Typography variant="headline">Bienvenue sur Redline !</Typography>
-        <Typography variant="subheading">Coming soon...</Typography>
-      </div>
+        <div>
+            <ToggleBar/>
+            <i class="material-icons">add_alert</i>
+            <div className={this.props.className}>
+            <Typography variant="headline">Bienvenue sur Redline !</Typography>
+            <Typography variant="subheading">Coming soon...</Typography>
+            </div>
+        </div>
     )
   }
 }
