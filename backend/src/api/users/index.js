@@ -23,6 +23,14 @@ router.get('/', controler.findAll);
 router.post('/', controler.create);
 
 /**
+ * @api {get} / Get all user status
+ * @apiName GetAllUserStatus
+ * @apiGroup Static Pages
+ * @apiDescription Permet d'obtenir une liste des status de tous les utilisateurs
+ */
+router.get('/status', controler.getAllStatus);
+
+/**
  * @api {get} / Get one user
  * @apiName GetUser
  * @apiGroup Static Pages

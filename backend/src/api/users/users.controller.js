@@ -3,9 +3,9 @@ const User = require('./users.model');
 module.exports = {};
 
 module.exports.findAll = (req, res) => {
-  User.find({}, (err, messages) => {
+  User.find({}, (err, users) => {
     if (err) return res.status(500).json(err);
-    return res.status(200).json(messages);
+    return res.status(200).json(users);
   });
 };
 
@@ -51,4 +51,13 @@ module.exports.changeStatus = (req, res) => {
       return res.status(200).json('Success');
     },
   );
+};
+
+module.exports.getAllStatus = (req, res) => {
+  User.find({}, (err, users) => {
+    if (err) return res.status(500).json(err);
+    console.log(users);
+    const allStatus = users.map(u => u.status);
+    return res.status(200).json(allStatus);
+  });
 };
