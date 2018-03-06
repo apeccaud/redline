@@ -2,6 +2,9 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Switch, withStyles} from 'material-ui';
 
+import StatusViewStudent from './StatusViewStudent';
+import StatusViewTeacher from './StatusViewTeacher';
+
 
 const styles = {
   toggleBar: {
@@ -47,7 +50,7 @@ class Content extends PureComponent {
           </div>
 
           <div className={this.props.classes.centerMe}>
-            {this.state.isTeacher ? <span>Yo</span> : <span>Pas yo</span>}
+            {this.state.isTeacher ? <StatusViewTeacher/> : <StatusViewStudent/>}
           </div>
 
         </div>
