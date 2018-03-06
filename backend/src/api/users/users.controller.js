@@ -46,7 +46,7 @@ module.exports.changeStatus = (req, res) => {
       },
     },
     { runValidators: true },
-    (err, n) => {
+    (err) => {
       if (err) return res.status(500).json(err);
       return res.status(200).json('Success');
     },
