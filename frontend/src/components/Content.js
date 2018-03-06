@@ -1,54 +1,59 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Typography, Switch, AppBar} from 'material-ui';
+import {Switch, withStyles} from 'material-ui';
 
-class ToggleBar extends PureComponent {
-    static propTypes = {
-        classes: PropTypes.object.isRequired
-    };
 
-    state = {
-        checked: true
-    };
-
-    handleChange = (event, value) => {
-        this.setState({checked: value});
-    };
-
-    render() {
-        return (
-            <AppBar position="static">
-                <Switch
-                    checked={this.state.checked}
-                    onChange={this.handleChange}
-                    fullWidth
-                />
-            </AppBar>
-        );
-    }
-}
+const styles = {
+  toggleBar: {
+    textAlign: 'right',
+    padding: '8px',
+  },
+  centerMe: {
+    display: 'flex',
+    justifyContent: 'center',
+  }
+};
 
 class Content extends PureComponent {
   static propTypes = {
-    className: PropTypes.string
+    classes: PropTypes.object.isRequired
   };
 
-  static defaultProps = {
-    className: ''
+  constructor(props) {
+    super(props);
+    this.state = {
+      isTeacher: false,
+    };
+  }
+
+  handleSwitchChange = () => {
+    this.setState(prevState => ({
+      isTeacher: !prevState.isTeacher
+    }));
   };
 
   render() {
     return (
-        <div>
-            <ToggleBar/>
-            <i class="material-icons">add_alert</i>
-            <div className={this.props.className}>
-            <Typography variant="headline">Bienvenue sur Redline !</Typography>
-            <Typography variant="subheading">Coming soon...</Typography>
-            </div>
+      <div>
+        {/*<ToggleBar/>*/}
+        <div className={this.props.className}>
+
+          <div className={this.props.classes.toggleBar}>
+            <span>{this.state.isTeacher ? 'Vue Professeur' : 'Vue élève'}</span>
+            <Switch
+              checked={this.state.isTeacher}
+              onChange={this.handleSwitchChange}
+            />
+          </div>
+
+          <div className={this.props.classes.centerMe}>
+            {this.state.isTeacher ? <span>Yo</span> : <span>Pas yo</span>}
+          </div>
+
         </div>
+      </div>
     )
   }
 }
 
-export default Content;
+export default withStyles(styles)(Content);
