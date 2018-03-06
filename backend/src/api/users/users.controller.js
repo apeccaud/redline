@@ -24,7 +24,7 @@ module.exports.getStatus = (req, res) => {
     { _id: req.params.id },
     (err, user) => {
       if (err) return res.status(500).json(err);
-      return res.status(200).send(user.status);
+      return res.status(200).json(user.status);
     },
   );
 };
@@ -35,4 +35,20 @@ module.exports.create = (req, res) => {
     if (err) return res.status(500).json(err);
     return res.status(201).json(user);
   });
+};
+
+module.exports.changeStatus = (req, res) => {
+  User.update(
+    { _id: req.params.id },
+    {
+      $set: {
+        status: req.body.status,
+      },
+    },
+    { runValidators: true },
+    (err, n) => {
+      if (err) return res.status(500).json(err);
+      return res.status(200).json('Success');
+    },
+  );
 };

@@ -42,4 +42,15 @@ router.get('/:id', controler.findOne);
  */
 router.get('/:id/status', controler.getStatus);
 
+/**
+ * @api {put} / Change status of a user
+ * @apiName ChangeUserStatus
+ * @apiGroup Static Pages
+ * @apiDescription Change le statut d'un utilisateur par un statut spécifié et respectant la
+ * validation ('lost' ou 'neutral')
+ *
+ * @apiParam  {String} id id de l'user à récupérer
+ */
+router.put('/:id/changeStatus', controler.changeStatus);
+
 module.exports = router;
