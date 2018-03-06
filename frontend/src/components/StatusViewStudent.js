@@ -28,7 +28,7 @@ class StatusViewStudent extends PureComponent {
 
   onPressButton = () => {
     this.setState(prevState => ({
-      buttonIsPressed: !this.state.buttonIsPressed,
+      buttonIsPressed: !prevState.buttonIsPressed,
     }));
   };
 
