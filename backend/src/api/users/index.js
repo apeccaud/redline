@@ -4,7 +4,7 @@ const router = new Router();
 const controler = require('./users.controller');
 
 /**
- * @api {get} / Get all users
+ * @api {get} /users Get all users
  * @apiName GetAllUsers
  * @apiGroup Static Pages
  * @apiDescription Affiche tous les utilisateurs
@@ -12,7 +12,7 @@ const controler = require('./users.controller');
 router.get('/', controler.findAll);
 
 /**
- * @api {post} / Create a user
+ * @api {post} /users Create a user
  * @apiName CreateUser
  * @apiGroup Static Pages
  * @apiDescription Crée un utilisateur
@@ -23,7 +23,7 @@ router.get('/', controler.findAll);
 router.post('/', controler.create);
 
 /**
- * @api {get} / Get all user status
+ * @api {get} /users/status Get all user status
  * @apiName GetAllUserStatus
  * @apiGroup Static Pages
  * @apiDescription Permet d'obtenir une liste des status de tous les utilisateurs
@@ -31,7 +31,7 @@ router.post('/', controler.create);
 router.get('/status', controler.getAllStatus);
 
 /**
- * @api {get} / Get one user
+ * @api {get} /users/:id Get one user
  * @apiName GetUser
  * @apiGroup Static Pages
  * @apiDescription Affiche un utilisateur à partir de son id
@@ -41,7 +41,7 @@ router.get('/status', controler.getAllStatus);
 router.get('/:id', controler.findOne);
 
 /**
- * @api {get} / Get status of a user
+ * @api {get} /users/:id/status Get status of a user
  * @apiName GetUserStatus
  * @apiGroup Static Pages
  * @apiDescription Affiche le statut d'un utilisateur à partir de son id
@@ -51,7 +51,7 @@ router.get('/:id', controler.findOne);
 router.get('/:id/status', controler.getStatus);
 
 /**
- * @api {put} / Change status of a user
+ * @api {put} /users/:id/changeStatus Change status of a user
  * @apiName ChangeUserStatus
  * @apiGroup Static Pages
  * @apiDescription Change le statut d'un utilisateur par un statut spécifié et respectant la
