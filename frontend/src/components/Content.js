@@ -58,7 +58,14 @@ class Content extends PureComponent {
     this.setState(prevState => ({
       user: prevState.user._id === student._id ? teacher : student,
     }));
-    console.log(this.state.user);
+  };
+
+  changeStatus = (status) => {
+    let user = this.state.user;
+    this.setState({
+      user: { ...user, status },
+    });
+    // TODO API call
   };
 
   render() {
@@ -76,7 +83,12 @@ class Content extends PureComponent {
           </div>
 
           <div className={this.props.classes.paddingMain}>
-            {this.state.user.role === 'teacher' ? <StatusViewTeacher user={this.state.user}/> : <StatusViewStudent user={this.state.user}/>}
+            {
+              this.state.user.role === 'teacher' ?
+                <StatusViewTeacher user={this.state.user}/>
+              :
+                <StatusViewStudent user={this.state.user} onClickButton={this.changeStatus}/>
+            }
           </div>
 
         </div>

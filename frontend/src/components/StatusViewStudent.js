@@ -18,19 +18,13 @@ class StatusViewStudent extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     user: PropTypes.object,
+    onClickButton: PropTypes.func,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      buttonIsPressed: false,
-    };
-  }
-
   onPressButton = () => {
-    this.setState(prevState => ({
-      buttonIsPressed: !prevState.buttonIsPressed,
-    }));
+    // Change parent state (user)
+    let newStatus = this.props.user.status === 'lost' ? 'neutral' : 'lost';
+    this.props.onClickButton(newStatus);
   };
 
   render() {
@@ -43,11 +37,11 @@ class StatusViewStudent extends PureComponent {
 
         <div className={this.props.classes.centerMe}>
           <Button
-            variant="raised"
-            color={this.state.buttonIsPressed ? "secondary" : "primary"}
+            variant='raised'
+            color={this.props.user.status === 'lost' ? 'secondary' : 'primary'}
             className={this.props.classes.stopButton}
             onClick={this.onPressButton}>
-            {this.state.buttonIsPressed ? <span>J'ai tout compris</span> : <span>Ça devient compliqué</span>}
+            {this.props.user.status === 'lost' ? <span>J'ai tout compris</span> : <span>Ça devient compliqué</span>}
           </Button>
         </div>
 
