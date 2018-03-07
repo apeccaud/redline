@@ -31,6 +31,14 @@ router.post('/', controler.create);
 router.get('/status', controler.getAllStatus);
 
 /**
+ * @api {get} /users/resetAllStatus Reset status of all users to 'neutral'
+ * @apiName resetAllStatus
+ * @apiGroup Static Pages
+ * @apiDescription Réinitialise le statut de tous les utilisateurs à 'neutral'
+ */
+router.get('/resetAllStatus', controler.resetAllStatus);
+
+/**
  * @api {get} /users/:id Get one user
  * @apiName GetUser
  * @apiGroup Static Pages
