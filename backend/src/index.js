@@ -7,8 +7,12 @@ const config = require('./config');
 const app = express();
 const server = require('http').Server(app);
 
+const cors = require('cors');
+
 require('./config/mongoose');
 require('./config/express')(app);
+
+app.use(cors());
 
 app.use('/api', require('./api'));
 

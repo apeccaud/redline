@@ -5,10 +5,9 @@ import PropTypes from 'prop-types';
 import './App.css';
 import theme from '../theme';
 import GlobalAppBar from './GlobalAppBar';
-import TabBar from './TabBar'
 import Content from './Content';
 
-const styles = theme => ({
+const styles = {
   root: {
     marginTop: 56,
     '@media (min-width:0px) and (orientation: landscape)': {
@@ -18,11 +17,7 @@ const styles = theme => ({
       marginTop: 64
     }
   },
-  content: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 5,
-  }
-});
+};
 
 class App extends Component {
   static propTypes = {
@@ -30,16 +25,13 @@ class App extends Component {
   };
 
   render() {
-    const {classes} = this.props;
-
     return (
-      <div className={classes.root}>
+      <div className={this.props.classes.root}>
         <MuiThemeProvider theme={theme}>
           <Reboot/>
-          <GlobalAppBar appTitle="Redline" hasTabBarBelow/>
-          <TabBar/>
+          <GlobalAppBar appTitle="Redline"/>
           {/* You should work mainly in the Content component */}
-          <Content className={classes.content}/>
+          <Content/>
         </MuiThemeProvider>
       </div>
     );

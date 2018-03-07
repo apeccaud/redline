@@ -56,8 +56,22 @@ module.exports.changeStatus = (req, res) => {
 module.exports.getAllStatus = (req, res) => {
   User.find({}, (err, users) => {
     if (err) return res.status(500).json(err);
-    console.log(users);
     const allStatus = users.map(u => u.status);
     return res.status(200).json(allStatus);
+  });
+};
+
+module.exports.resetAllStatus = (req, res) => {
+  User.find({}, (err, users) => {
+    if (err) return res.status(500).json(err);
+    const status = users.map((u) => {
+      u.set({ status: 'neutral' });
+      u.save((err1) => {
+        if (err1) return console.error(err1);
+        return true;
+      });
+      return u.status;
+    });
+    return res.status(200).json(status);
   });
 };
