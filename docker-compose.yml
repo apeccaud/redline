@@ -3,8 +3,8 @@ services:
 
   web:
     image: ebm1718travis/redline:latest
-    # depends_on:
-    #   - mongodb
+    depends_on:
+      - mongodb
     environment:
       - MONGODB_URI=mongodb://mongodb/redline
       - APP_PORT=4000
@@ -13,10 +13,10 @@ services:
       ebm-filrouge:
         aliases:
           - redline
-  # mongodb:
-  #   image: mongo
-  #   networks:
-  #     - local
+  mongodb:
+    image: mongo
+    networks:
+      - local
 networks:
   local:
   ebm-filrouge:
