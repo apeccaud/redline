@@ -178,5 +178,21 @@ define({ "api": [
         "url": "http://localhost:4000/api/users/:id/status"
       }
     ]
+  },
+  {
+    "type": "get",
+    "url": "/users/resetAllStatus",
+    "title": "Reset status of all users to 'neutral'",
+    "name": "resetAllStatus",
+    "group": "Static_Pages",
+    "description": "<p>Réinitialise le statut de tous les utilisateurs à 'neutral'</p>",
+    "version": "0.0.0",
+    "filename": "src/api/users/index.js",
+    "groupTitle": "Static_Pages",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/users/resetAllStatus"
+      }
+    ]
   }
 ] });
