@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import Button from 'material-ui/Button';
 import {withStyles} from 'material-ui';
 import request from 'superagent';
+import PropTypes from 'prop-types';
 
 import config from '../config';
 
@@ -27,6 +28,11 @@ class StatusViewTeacher extends PureComponent {
     };
   }
 
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    user: PropTypes.object,
+  };
+
   componentDidMount() {
     this.getTotalStatus();
   }
@@ -37,12 +43,23 @@ class StatusViewTeacher extends PureComponent {
         this.setState({
           totalStatus: res.body
         });
-        console.log(res.body);
       })
       .catch(err => {
         console.error(err.message);
       });
   }
+
+  onPressResetButton = () => {
+    return request.get(`${config.remote.host}/api/users/resetAllStatus`)
+      .then(res => {
+        this.setState({
+          totalStatus: res.body
+        });
+      })
+      .catch(err => {
+        console.error(err.message);
+      });
+  };
 
   render() {
     return (
