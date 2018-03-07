@@ -26,21 +26,46 @@ class App extends Component {
     classes: PropTypes.object.isRequired
   };
 
-  // Will be replace by a getOrCreateUser function once we connect the app to LinkApp
-  createUser = () => {
-    request.post(`${config.remote.host}/api/users`)
-      .send({ name: 'whatever', role: 'student' })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.error(err.message);
-      })
-  };
-
-  componentDidMount() {
-    this.createUser();
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     teacher: {},
+  //     student: {},
+  //   };
+  // }
+  //
+  // // Will be replace by a getOrCreateUser function once we connect the app to LinkApp
+  // createUser = () => {
+  //   // Create student
+  //   request.post(`${config.remote.host}/api/users`)
+  //     .send({ name: 'whatever', role: 'student' })
+  //     .then(res => {
+  //       console.log(res.body);
+  //       this.setState({
+  //         student: res.body
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.error(err.message);
+  //     });
+  //
+  //   // Create teacher
+  //   request.post(`${config.remote.host}/api/users`)
+  //     .send({ name: 'whatever', role: 'teacher' })
+  //     .then(res => {
+  //       console.log(res.body);
+  //       this.setState({
+  //         teacher: res.body
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.error(err.message);
+  //     });
+  // };
+  //
+  // componentDidMount() {
+  //   this.createUser();
+  // }
 
   render() {
     return (

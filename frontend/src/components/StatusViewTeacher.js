@@ -21,6 +21,10 @@ class StatusViewTeacher extends PureComponent {
     return (
       <div className={this.props.classes.centerMe}>
 
+        <div className={this.props.classes.centerMe}>
+          Bienvenue {this.props.user.name}
+        </div>
+
         <div className={this.props.classes.mainNumber}>
           5
         </div>

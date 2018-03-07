@@ -16,7 +16,8 @@ const styles = {
 
 class StatusViewStudent extends PureComponent {
   static propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    user: PropTypes.object,
   };
 
   constructor(props) {
@@ -37,12 +38,16 @@ class StatusViewStudent extends PureComponent {
       <div>
 
         <div className={this.props.classes.centerMe}>
+          Bienvenue {this.props.user.name}
+        </div>
+
+        <div className={this.props.classes.centerMe}>
           <Button
             variant="raised"
-            color={this.state.buttonIsPressed ?"secondary" : "primary"}
+            color={this.state.buttonIsPressed ? "secondary" : "primary"}
             className={this.props.classes.stopButton}
             onClick={this.onPressButton}>
-            {this.state.buttonIsPressed ? <span>En faite ça va</span> : <span>Ça devient compliqué</span>}
+            {this.state.buttonIsPressed ? <span>J'ai tout compris</span> : <span>Ça devient compliqué</span>}
           </Button>
         </div>
 
