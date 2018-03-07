@@ -1,9 +1,11 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Switch, withStyles} from 'material-ui';
+import request from 'superagent';
 
 import StatusViewStudent from './StatusViewStudent';
 import StatusViewTeacher from './StatusViewTeacher';
+import config from '../config';
 
 
 const styles = {
@@ -19,21 +21,9 @@ const styles = {
   },
 };
 
-const student = {
-  status: "neutral",
-    _id: "5a9e87bc26ef108e1d654704",
-  name: "Lucas",
-  role: "student",
-  __v: 0
-};
+const STUDENTID = '5a9e87bc26ef108e1d654704';
 
-const teacher = {
-  status: "lost",
-    _id: "5a9e9d3b515bd2963a2a4c28",
-  name: "Alex",
-  role: "teacher",
-  __v: 0
-};
+const TEACHERID = '5a9e9d3b515bd2963a2a4c28';
 
 class Content extends PureComponent {
   static propTypes = {
@@ -49,15 +39,25 @@ class Content extends PureComponent {
 
   componentDidMount() {
     // Default user is set to student
-    this.setState({
-      user: student,
-    });
+    this.getUser('student');
+  }
+
+  async getUser(role) {
+    if (['teacher', 'student'].indexOf(role) === -1) return console.error('Impossible to fetch user');
+
+    request.get(`${config.remote.host}/api/users/${role === 'teacher' ? TEACHERID : STUDENTID}`)
+      .then(res => {
+        this.setState({
+          user: res.body
+        });
+      })
+      .catch(err => {
+        console.error(err.message);
+      });
   }
 
   handleSwitchChange = () => {
-    this.setState(prevState => ({
-      user: prevState.user._id === student._id ? teacher : student,
-    }));
+    this.getUser(this.state.user.role === 'teacher' ? 'student' : 'teacher');
   };
 
   changeStatus = (status) => {
