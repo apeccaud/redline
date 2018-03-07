@@ -1,7 +1,7 @@
 define({ "api": [
   {
     "type": "put",
-    "url": "/",
+    "url": "/users/:id/changeStatus",
     "title": "Change status of a user",
     "name": "ChangeUserStatus",
     "group": "Static_Pages",
@@ -24,13 +24,13 @@ define({ "api": [
     "groupTitle": "Static_Pages",
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/api/"
+        "url": "http://localhost:4000/api/users/:id/changeStatus"
       }
     ]
   },
   {
     "type": "post",
-    "url": "/",
+    "url": "/users",
     "title": "Create a user",
     "name": "CreateUser",
     "group": "Static_Pages",
@@ -60,13 +60,13 @@ define({ "api": [
     "groupTitle": "Static_Pages",
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/api/"
+        "url": "http://localhost:4000/api/users"
       }
     ]
   },
   {
     "type": "get",
-    "url": "/",
+    "url": "/users/status",
     "title": "Get all user status",
     "name": "GetAllUserStatus",
     "group": "Static_Pages",
@@ -76,13 +76,13 @@ define({ "api": [
     "groupTitle": "Static_Pages",
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/api/"
+        "url": "http://localhost:4000/api/users/status"
       }
     ]
   },
   {
     "type": "get",
-    "url": "/",
+    "url": "/users",
     "title": "Get all users",
     "name": "GetAllUsers",
     "group": "Static_Pages",
@@ -92,7 +92,7 @@ define({ "api": [
     "groupTitle": "Static_Pages",
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/api/"
+        "url": "http://localhost:4000/api/users"
       }
     ]
   },
@@ -123,7 +123,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/",
+    "url": "/users/:id",
     "title": "Get one user",
     "name": "GetUser",
     "group": "Static_Pages",
@@ -146,13 +146,13 @@ define({ "api": [
     "groupTitle": "Static_Pages",
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/api/"
+        "url": "http://localhost:4000/api/users/:id"
       }
     ]
   },
   {
     "type": "get",
-    "url": "/",
+    "url": "/users/:id/status",
     "title": "Get status of a user",
     "name": "GetUserStatus",
     "group": "Static_Pages",
@@ -175,7 +175,7 @@ define({ "api": [
     "groupTitle": "Static_Pages",
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/api/"
+        "url": "http://localhost:4000/api/users/:id/status"
       }
     ]
   }
