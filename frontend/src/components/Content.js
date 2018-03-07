@@ -45,7 +45,7 @@ class Content extends PureComponent {
   async getUser(role) {
     if (['teacher', 'student'].indexOf(role) === -1) return console.error('Impossible to fetch user');
 
-    request.get(`${config.remote.host}/api/users/${role === 'teacher' ? TEACHERID : STUDENTID}`)
+    return request.get(`${config.remote.host}/api/users/${role === 'teacher' ? TEACHERID : STUDENTID}`)
       .then(res => {
         this.setState({
           user: res.body
@@ -64,8 +64,13 @@ class Content extends PureComponent {
     let user = this.state.user;
     this.setState({
       user: { ...user, status },
-    });
-    // TODO API call
+    }, this.saveUserStatus);
+  };
+
+  async saveUserStatus() {
+    request.put(`${config.remote.host}/api/users/${this.state.user._id}/changeStatus`)
+      .send({ status: this.state.user.status })
+      .catch(err => console.error(err.message));
   };
 
   render() {
