@@ -6,6 +6,7 @@ import request from 'superagent';
 import StatusViewStudent from './StatusViewStudent';
 import StatusViewTeacher from './StatusViewTeacher';
 import config from '../config';
+import socket from "../services/sockets";
 
 
 const styles = {
@@ -40,12 +41,27 @@ class Content extends PureComponent {
   componentDidMount() {
     // Default user is set to student
     this.getUser('student');
+    socket.on('STATUS_CHANGED', () => {
+      this.updateUser();
+    });
   }
 
   async getUser(role) {
     if (['teacher', 'student'].indexOf(role) === -1) return console.error('Impossible to fetch user');
 
     return request.get(`${config.remote.host}/api/users/${role === 'teacher' ? TEACHERID : STUDENTID}`)
+      .then(res => {
+        this.setState({
+          user: res.body
+        });
+      })
+      .catch(err => {
+        console.error(err.message);
+      });
+  }
+
+  async updateUser() {
+    return request.get(`${config.remote.host}/api/users/${this.state.user._id}`)
       .then(res => {
         this.setState({
           user: res.body
