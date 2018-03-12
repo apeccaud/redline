@@ -36,12 +36,14 @@ class StatusViewTeacher extends PureComponent {
 
   componentDidMount() {
     this.getTotalStatus();
-    socket.on('STATUS_CHANGED', () => {
-      this.getTotalStatus();
-    });
+    socket.on('STATUS_CHANGED', this.getTotalStatus);
   }
 
-  async getTotalStatus() {
+  componentWillUnmount() {
+    socket.removeListener('STATUS_CHANGED', this.getTotalStatus);
+  }
+
+  getTotalStatus = async() => {
     return request.get(`${config.remote.host}/api/users/status`)
       .then(res => {
         this.setState({
@@ -51,7 +53,7 @@ class StatusViewTeacher extends PureComponent {
       .catch(err => {
         console.error(err.message);
       });
-  }
+  };
 
   onPressResetButton = () => {
     return request.get(`${config.remote.host}/api/users/resetAllStatus`)
