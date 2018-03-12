@@ -6,7 +6,6 @@ const socketServer = {
     this.io.on('connection', (socket) => {
       // socket.join('default');
       console.log(socket);
-      console.log('A user connected');
     });
   },
   emit(...args) {
