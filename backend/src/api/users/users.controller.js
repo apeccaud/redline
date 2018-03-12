@@ -1,4 +1,5 @@
 const User = require('./users.model');
+const socketServer = require('../../config/sockets');
 
 module.exports = {};
 
@@ -48,6 +49,8 @@ module.exports.changeStatus = (req, res) => {
     { runValidators: true },
     (err) => {
       if (err) return res.status(500).json(err);
+      // Emit socket to notify that status changed
+      socketServer.emit('STATUS_CHANGED');
       return res.status(200).json('Success');
     },
   );
@@ -72,6 +75,8 @@ module.exports.resetAllStatus = (req, res) => {
       });
       return u.status;
     });
+    // Emit socket to notify that status changed
+    socketServer.emit('STATUS_CHANGED');
     return res.status(200).json(status);
   });
 };
