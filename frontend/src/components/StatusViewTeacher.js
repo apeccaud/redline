@@ -5,6 +5,7 @@ import request from 'superagent';
 import PropTypes from 'prop-types';
 
 import config from '../config';
+import socket from '../services/sockets';
 
 
 const styles = {
@@ -35,6 +36,9 @@ class StatusViewTeacher extends PureComponent {
 
   componentDidMount() {
     this.getTotalStatus();
+    socket.on('STATUS_CHANGED', () => {
+      this.getTotalStatus();
+    });
   }
 
   async getTotalStatus() {
