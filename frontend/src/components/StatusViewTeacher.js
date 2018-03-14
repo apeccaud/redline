@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react';
 import {withStyles} from 'material-ui';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
-import request from 'superagent';
 import PropTypes from 'prop-types';
 
 import socket from '../services/sockets';
