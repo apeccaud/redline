@@ -1,11 +1,11 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Switch, withStyles} from 'material-ui';
-import request from 'superagent';
 
 import StatusViewStudent from './StatusViewStudent';
 import StatusViewTeacher from './StatusViewTeacher';
-import config from '../config';
+import socket from '../services/sockets';
+import { getUser as getUserRep, saveUserStatus as saveUserStatusRep } from '../repository/users.repository';
 
 
 const styles = {
@@ -37,20 +37,31 @@ class Content extends PureComponent {
   componentDidMount() {
     // Default user is set to student
     this.getUser('student');
+    socket.on('STATUS_CHANGED', () => {
+      this.updateUser();
+    });
   }
 
   async getUser(role) {
     if (['teacher', 'student'].indexOf(role) === -1) return console.error('Impossible to fetch user');
 
-    return request.get(`${config.remote.host}/api/users/${role === 'teacher' ? TEACHERID : STUDENTID}`)
-      .then(res => {
+    return getUserRep(role === 'teacher' ? TEACHERID : STUDENTID)
+      .then(user => {
         this.setState({
-          user: res.body
+          user: user
         });
       })
-      .catch(err => {
-        console.error(err.message);
-      });
+      .catch(err => console.error(err.message));
+  }
+
+  async updateUser() {
+    return getUserRep(this.state.user._id)
+      .then(user => {
+        this.setState({
+          user: user
+        });
+      })
+      .catch(err => console.error(err.message));
   }
 
   handleSwitchChange = () => {
@@ -64,16 +75,14 @@ class Content extends PureComponent {
     }, this.saveUserStatus);
   };
 
-  async saveUserStatus() {
-    request.put(`${config.remote.host}/api/users/${this.state.user._id}/changeStatus`)
-      .send({ status: this.state.user.status })
+  saveUserStatus = async() => {
+    saveUserStatusRep(this.state.user._id, this.state.user.status)
       .catch(err => console.error(err.message));
   };
 
   render() {
     return (
       <div>
-        {/*<ToggleBar/>*/}
         <div className={this.props.classes.centerMe}>
 
           <div className={this.props.classes.toggleBar}>

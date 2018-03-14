@@ -5,7 +5,8 @@ import Typography from 'material-ui/Typography';
 import request from 'superagent';
 import PropTypes from 'prop-types';
 
-import config from '../config';
+import socket from '../services/sockets';
+import { resetAllStatus as resetAllStatusRep, getTotalStatus as getTotalStatusRep } from "../repository/users.repository";
 
 
 const styles = {
@@ -35,30 +36,31 @@ class StatusViewTeacher extends PureComponent {
 
   componentDidMount() {
     this.getTotalStatus();
+    socket.on('STATUS_CHANGED', this.getTotalStatus);
   }
 
-  async getTotalStatus() {
-    return request.get(`${config.remote.host}/api/users/status`)
-      .then(res => {
-        this.setState({
-          totalStatus: res.body
-        });
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
+  componentWillUnmount() {
+    socket.removeListener('STATUS_CHANGED', this.getTotalStatus);
   }
 
-  onPressResetButton = () => {
-    return request.get(`${config.remote.host}/api/users/resetAllStatus`)
-      .then(res => {
+  getTotalStatus = async() => {
+    return getTotalStatusRep()
+      .then(status => {
         this.setState({
-          totalStatus: res.body
+          totalStatus: status
         });
       })
-      .catch(err => {
-        console.error(err.message);
-      });
+      .catch(err => console.log(err));
+  };
+
+  onPressResetButton = async() => {
+    return resetAllStatusRep()
+      .then(status => {
+        this.setState({
+          totalStatus: status
+        });
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
