@@ -1,10 +1,8 @@
 const config = require('../config');
 
 const isAuthenticated = (req, res, next) => {
-  console.log('Authenticate');
-  console.log(config.authUrl);
-  // Get user token in request
-  // Check validity of token in linkapp
+  // TODO : Check token validity in Linkapp
+  if (!req.user) return res.status(401).send({ authUrl: config.authUrl });
   return next();
 };
 
