@@ -1,11 +1,10 @@
 import React, {PureComponent} from 'react';
 import Button from 'material-ui/Button';
 import {withStyles} from 'material-ui';
-import request from 'superagent';
 import PropTypes from 'prop-types';
 
-import config from '../config';
 import socket from '../services/sockets';
+import { resetAllStatus as resetAllStatusRep, getTotalStatus as getTotalStatusRep } from "../repository/users.repository";
 
 
 const styles = {
@@ -44,27 +43,23 @@ class StatusViewTeacher extends PureComponent {
   }
 
   getTotalStatus = async() => {
-    return request.get(`${config.remote.host}/api/users/status`)
-      .then(res => {
+    return getTotalStatusRep()
+      .then(status => {
         this.setState({
-          totalStatus: res.body
+          totalStatus: status
         });
       })
-      .catch(err => {
-        console.error(err.message);
-      });
+      .catch(err => console.log(err));
   };
 
-  onPressResetButton = () => {
-    return request.get(`${config.remote.host}/api/users/resetAllStatus`)
-      .then(res => {
+  onPressResetButton = async() => {
+    return resetAllStatusRep()
+      .then(status => {
         this.setState({
-          totalStatus: res.body
+          totalStatus: status
         });
       })
-      .catch(err => {
-        console.error(err.message);
-      });
+      .catch(err => console.log(err));
   };
 
   render() {
