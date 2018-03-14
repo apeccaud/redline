@@ -16,9 +16,6 @@ const styles = {
   centerMe: {
     textAlign: 'center',
   },
-  paddingMain: {
-    paddingTop: 25,
-  },
 };
 
 const STUDENTID = '5a9e87bc26ef108e1d654704';
@@ -96,7 +93,7 @@ class Content extends PureComponent {
             />
           </div>
 
-          <div className={this.props.classes.paddingMain}>
+          <div>
             {
               this.state.user.role === 'teacher' ?
                 <StatusViewTeacher user={this.state.user}/>
