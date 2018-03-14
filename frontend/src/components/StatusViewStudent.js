@@ -5,7 +5,6 @@ import Typography from 'material-ui/Typography';
 import Tooltip from 'material-ui/Tooltip';
 import PropTypes from 'prop-types';
 import {Clear as StopIcon, Done as OkIcon, Info as InfoIcon} from 'material-ui-icons';
-/*import {Stop as StopIcon, PlayArrow as OkIcon, Info as InfoIcon} from 'material-ui-icons';*/
 
 const styles = {
   centerMe: {
@@ -60,7 +59,6 @@ class StatusViewStudent extends PureComponent {
   };
 
   render() {
-    /*const {classes} = this.props;*/
 
     return (
       <div>
