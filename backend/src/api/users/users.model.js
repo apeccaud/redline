@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema({
     required: true,
     default: 'neutral',
   },
+  linkappUsername: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -5,4 +5,5 @@ module.exports = {
   mongodb: {
     uri: process.env.MONGODB_URI,
   },
+  authUrl: 'https://linkapp.ebm.nymous.io',
 };
