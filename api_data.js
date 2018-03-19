@@ -181,6 +181,35 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/users/getFromJWT/:jwt",
+    "title": "Get a user from a JWT provided by Linkapp",
+    "name": "getFromJWT",
+    "group": "Static_Pages",
+    "description": "<p>Renvoie un utilisateur à partir d'un JWT</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "jwt",
+            "description": "<p>jwt permettant de retrouver l'user</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/api/users/index.js",
+    "groupTitle": "Static_Pages",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/users/getFromJWT/:jwt"
+      }
+    ]
+  },
+  {
+    "type": "get",
     "url": "/users/resetAllStatus",
     "title": "Reset status of all users to 'neutral'",
     "name": "resetAllStatus",
