@@ -181,30 +181,17 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/users/getFromJWT/:jwt",
-    "title": "Get a user from a JWT provided by Linkapp",
+    "url": "/users/get",
+    "title": "Get user in request parameter",
     "name": "getFromJWT",
     "group": "Static_Pages",
-    "description": "<p>Renvoie un utilisateur à partir d'un JWT</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "jwt",
-            "description": "<p>jwt permettant de retrouver l'user</p>"
-          }
-        ]
-      }
-    },
+    "description": "<p>Renvoie l'utilisateur dans le paramètre req</p>",
     "version": "0.0.0",
     "filename": "src/api/users/index.js",
     "groupTitle": "Static_Pages",
     "sampleRequest": [
       {
-        "url": "http://localhost:4000/api/users/getFromJWT/:jwt"
+        "url": "http://localhost:4000/api/users/get"
       }
     ]
   },
