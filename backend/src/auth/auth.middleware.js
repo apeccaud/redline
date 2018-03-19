@@ -2,34 +2,32 @@ const config = require('../config');
 const jwt = require('jsonwebtoken');
 const User = require('../api/users/users.model');
 
-const getOrCreateUser = async (linkappUser) => {
-  return new Promise((resolve, reject) => {
-    User.findOne(
-      { linkappUsername: linkappUser.username },
-      (err, user) => {
-        if (err) reject(err);
-        if (user) resolve(user);
-        // Create and save user
-        // TODO fix workaround : get role from role
-        // const newUser = new User({
-        //   name: linkappUser.nom,
-        //   role: linkappUser.role === 'etudiant' ? 'student' : 'teacher',
-        //   linkappUsername: linkappUser.username,
-        // });
-        const newUser = new User({
-          name: linkappUser.nom,
-          role: linkappUser.username === 'student' ? 'student' : 'teacher',
-          linkappUsername: linkappUser.username,
-        });
-        return newUser.save((errSave) => {
-          console.log('save user');
-          if (errSave) reject(errSave);
-          return resolve(newUser);
-        });
-      },
-    );
-  });
-};
+const getOrCreateUser = async linkappUser => new Promise((resolve, reject) => {
+  User.findOne(
+    { linkappUsername: linkappUser.username },
+    (err, user) => {
+      if (err) reject(err);
+      if (user) resolve(user);
+      // Create and save user
+      // TODO fix workaround : get role from role
+      // const newUser = new User({
+      //   name: linkappUser.nom,
+      //   role: linkappUser.role === 'etudiant' ? 'student' : 'teacher',
+      //   linkappUsername: linkappUser.username,
+      // });
+      const newUser = new User({
+        name: linkappUser.nom,
+        role: linkappUser.username === 'student' ? 'student' : 'teacher',
+        linkappUsername: linkappUser.username,
+      });
+      newUser.save((errSave) => {
+        console.log('save user');
+        if (errSave) reject(errSave);
+        resolve(newUser);
+      });
+    },
+  );
+});
 
 module.exports.isAuthenticated = (req, res, next) => {
   // TODO : Check token validity in Linkapp
