@@ -20,9 +20,6 @@ const styles = {
   centerMe: {
     textAlign: 'center',
   },
-  paddingMain: {
-    paddingTop: 25,
-  },
 };
 
 class Content extends PureComponent {
