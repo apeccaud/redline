@@ -82,42 +82,7 @@ module.exports.resetAllStatus = (req, res) => {
   });
 };
 
-module.exports.getOrCreateFromJWT = (req, res) => {
-  // Decode JWT
-  const parsedJTW = req.params.jwt.split(' ')[1];
-  const linkappUser = jwt.decode(parsedJTW);
-  // Find or create user
-  User.findOne(
-    { linkappUsername: linkappUser.username },
-    (err, user) => {
-      if (err) return res.status(500).json(err);
-      if (user) {
-        // User already exists
-        return res.status(200).json(user);
-      }
-      // Create and save user
-      // TODO fix workaround : get role from role
-      // const newUser = new User({
-      //   name: linkappUser.nom,
-      //   role: linkappUser.role === 'etudiant' ? 'student' : 'teacher',
-      //   linkappUsername: linkappUser.username,
-      // });
-      const newUser = new User({
-        name: linkappUser.nom,
-        role: linkappUser.username === 'student' ? 'student' : 'teacher',
-        linkappUsername: linkappUser.username,
-      });
-      return newUser.save((errSave) => {
-        console.log('save user');
-        if (err) return res.status(500).json(errSave);
-        return res.status(201).json(newUser);
-      });
-    },
-  );
-};
-
 module.exports.getUser = (req, res) => {
-  console.log('yooyoyoyo');
   if (!req.user) res.status(500).send('No user');
   return res.status(200).json(req.user);
 };

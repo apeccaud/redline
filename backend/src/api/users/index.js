@@ -38,6 +38,12 @@ router.get('/status', controler.getAllStatus);
  */
 router.get('/resetAllStatus', controler.resetAllStatus);
 
+/**
+ * @api {get} /users/get Get user in request parameter
+ * @apiName getFromJWT
+ * @apiGroup Static Pages
+ * @apiDescription Renvoie l'utilisateur dans le paramètre req
+ */
 router.get('/get', controler.getUser);
 
 /**
@@ -70,15 +76,5 @@ router.get('/:id/status', controler.getStatus);
  * @apiParam  {String} id id de l'user à récupérer
  */
 router.put('/:id/changeStatus', controler.changeStatus);
-
-/**
- * @api {get} /users/getFromJWT/:jwt Get a user from a JWT provided by Linkapp
- * @apiName getFromJWT
- * @apiGroup Static Pages
- * @apiDescription Renvoie un utilisateur à partir d'un JWT
- *
- * @apiParam  {String} jwt jwt permettant de retrouver l'user
- */
-router.get('/getOrCreateFromJWT/:jwt', controler.getOrCreateFromJWT);
 
 module.exports = router;

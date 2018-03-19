@@ -34,7 +34,7 @@ class Content extends PureComponent {
     this.getJWTFromUrl();
     this.getUser(); // Get or redirect
     socket.on('STATUS_CHANGED', () => {
-      this.updateUser();
+      this.getUser();
     });
   }
 
@@ -44,47 +44,11 @@ class Content extends PureComponent {
     if (jwt) {
       // Process JWT
       localStorage.setItem('token', jwt);
-      console.log('token stored in localStorage : ' + jwt);
-      // this.getOrCreateUserFromJWT(jwt);
     }
   }
 
   getUser() {
     return getUserRep()
-      .then(user => {
-        console.log(user);
-        this.setState({
-          user: user
-        });
-      })
-      .catch(err => console.error(err.message));
-  }
-
-  // async getOrCreateUserFromJWT(jwt) {
-  //   return getOrCreateUserFromJWTRep(jwt)
-  //     .then(user => {
-  //       console.log(user);
-  //       this.setState({
-  //         user: user
-  //       });
-  //     })
-  //     .catch(err => console.error(err.message));
-  // }
-
-  // async getUser(role) {
-  //   if (['teacher', 'student'].indexOf(role) === -1) return console.error('Impossible to fetch user');
-  //
-  //   return getUserRep(role === 'teacher' ? TEACHERID : STUDENTID)
-  //     .then(user => {
-  //       this.setState({
-  //         user: user
-  //       });
-  //     })
-  //     .catch(err => console.error(err.message));
-  // }
-
-  async updateUser() {
-    return getUserRep(this.state.user._id)
       .then(user => {
         this.setState({
           user: user

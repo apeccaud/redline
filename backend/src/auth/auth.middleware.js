@@ -9,19 +9,12 @@ const getOrCreateUser = async linkappUser => new Promise((resolve, reject) => {
       if (err) reject(err);
       if (user) resolve(user);
       // Create and save user
-      // TODO fix workaround : get role from role
-      // const newUser = new User({
-      //   name: linkappUser.nom,
-      //   role: linkappUser.role === 'etudiant' ? 'student' : 'teacher',
-      //   linkappUsername: linkappUser.username,
-      // });
       const newUser = new User({
         name: linkappUser.nom,
-        role: linkappUser.username === 'student' ? 'student' : 'teacher',
+        role: linkappUser.role === 'etudiant' ? 'student' : 'teacher',
         linkappUsername: linkappUser.username,
       });
       newUser.save((errSave) => {
-        console.log('save user');
         if (errSave) reject(errSave);
         resolve(newUser);
       });
@@ -38,54 +31,18 @@ module.exports.isAuthenticated = (req, res, next) => {
 module.exports.initialize = (req, res, next) => {
   const authHeader = req.headers.authorization || '';
 
+  if (!authHeader) return next();
+
   const parsedJTW = authHeader.split(' ')[1];
   const linkappUser = jwt.decode(parsedJTW);
 
-  getOrCreateUser(linkappUser)
+  return getOrCreateUser(linkappUser)
     .then((user) => {
       req.user = user;
-      console.log('Il la fait');
-      console.log(req.user);
       return next();
     })
     .catch((err) => {
       console.log(err);
-      next();
+      return next();
     });
-
-  // return next();
 };
-
-// const getOrCreateFromJWT = (jwt) => {
-//   // Decode JWT
-//   const parsedJTW = req.params.jwt.split(' ')[1];
-//   const linkappUser = jwt.decode(parsedJTW);
-//   // Find or create user
-//   User.findOne(
-//     { linkappUsername: linkappUser.username },
-//     (err, user) => {
-//       if (err) return res.status(500).json(err);
-//       if (user) {
-//         // User already exists
-//         return res.status(200).json(user);
-//       }
-//       // Create and save user
-//       // TODO fix workaround : get role from role
-//       // const newUser = new User({
-//       //   name: linkappUser.nom,
-//       //   role: linkappUser.role === 'etudiant' ? 'student' : 'teacher',
-//       //   linkappUsername: linkappUser.username,
-//       // });
-//       const newUser = new User({
-//         name: linkappUser.nom,
-//         role: linkappUser.username === 'student' ? 'student' : 'teacher',
-//         linkappUsername: linkappUser.username,
-//       });
-//       return newUser.save((errSave) => {
-//         console.log('save user');
-//         if (err) return res.status(500).json(errSave);
-//         return res.status(201).json(newUser);
-//       });
-//     },
-//   );
-// };
