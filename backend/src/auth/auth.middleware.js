@@ -1,5 +1,7 @@
-const config = require('../config');
 const jwt = require('jsonwebtoken');
+const request = require('superagent');
+
+const config = require('../config');
 const User = require('../api/users/users.model');
 
 const getOrCreateUser = async linkappUser => new Promise((resolve, reject) => {
@@ -22,27 +24,30 @@ const getOrCreateUser = async linkappUser => new Promise((resolve, reject) => {
   );
 });
 
+const getUpdatedToken = async authHeader => new Promise((resolve, reject) => {
+  const checkTokenUrl = `${config.authUrl}/api/checkandrefreshtoken`;
+  return request.get(checkTokenUrl)
+    .set('Authorization', authHeader)
+    .then(res => resolve(res.body.newToken))
+    .catch(err => reject(err));
+});
+
 module.exports.isAuthenticated = (req, res, next) => {
-  // TODO : Check token validity in Linkapp
   if (!req.user) return res.status(401).json({ authUrl: config.authUrl });
   return next();
 };
 
-module.exports.initialize = (req, res, next) => {
+module.exports.initialize = async (req, res, next) => {
   const authHeader = req.headers.authorization || '';
-
   if (!authHeader) return next();
-
-  const parsedJTW = authHeader.split(' ')[1];
-  const linkappUser = jwt.decode(parsedJTW);
-
-  return getOrCreateUser(linkappUser)
-    .then((user) => {
-      req.user = user;
-      return next();
-    })
-    .catch((err) => {
-      console.log(err);
-      return next();
-    });
+  try {
+    const token = await getUpdatedToken(authHeader);
+    const parsedJTW = token.split(' ')[1];
+    const linkappUser = jwt.decode(parsedJTW);
+    req.user = await getOrCreateUser(linkappUser);
+    return next();
+  } catch (e) {
+    console.log(e);
+    return next();
+  }
 };
