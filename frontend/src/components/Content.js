@@ -8,7 +8,6 @@ import socket from '../services/sockets';
 import {
   getUser as getUserRep,
   saveUserStatus as saveUserStatusRep,
-  getOrCreateUserFromJWT as getOrCreateUserFromJWTRep
 } from '../repository/users.repository';
 
 
