@@ -21,12 +21,9 @@ const styles = {
 };
 
 class StatusViewTeacher extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      totalStatus: [],
-    };
-  }
+  state = {
+    totalStatus: [],
+  };
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
