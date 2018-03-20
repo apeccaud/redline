@@ -59,7 +59,6 @@ class StatusViewStudent extends PureComponent {
   };
 
   render() {
-
     return (
       <div>
 
