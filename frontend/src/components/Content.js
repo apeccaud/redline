@@ -51,7 +51,7 @@ class Content extends PureComponent {
 
   getView = () => {
     if (this.state.user.role === 'teacher') {
-      return <StatusViewTeacher user={this.state.user}/>
+      return <StatusViewTeacher />
     }
     else if (this.state.user.role === 'student') {
       return <StatusViewStudent />
