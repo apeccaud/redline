@@ -5,6 +5,7 @@ import Typography from 'material-ui/Typography';
 import Tooltip from 'material-ui/Tooltip';
 import PropTypes from 'prop-types';
 import {Clear as StopIcon, Done as OkIcon, Info as InfoIcon} from 'material-ui-icons';
+import QCMViewStudent from './QCMViewStudent';
 
 const styles = {
   centerMe: {
@@ -107,6 +108,8 @@ class StatusViewStudent extends PureComponent {
             Appuyer sur le bouton permet de notifer au professeur que vous avez du mal à suivre ou non
           </Typography>
         </div>
+
+        <QCMViewStudent/>
 
       </div>
     )
