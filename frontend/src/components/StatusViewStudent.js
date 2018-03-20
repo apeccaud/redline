@@ -1,11 +1,14 @@
-import React, {PureComponent} from 'react';
-import {withStyles} from 'material-ui';
+import React, { PureComponent } from 'react';
+import { withStyles } from 'material-ui';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import Tooltip from 'material-ui/Tooltip';
-import PropTypes from 'prop-types';
-import {Clear as StopIcon, Done as OkIcon, Info as InfoIcon} from 'material-ui-icons';
+import { Clear as StopIcon, Done as OkIcon, Info as InfoIcon } from 'material-ui-icons';
 import { connect } from 'react-redux';
+
+import { saveUserStatus as saveUserStatusRep } from "../repository/users.repository";
+import { saveStatus } from '../redux/user/actionCreators';
+
 
 const styles = {
   centerMe: {
@@ -47,16 +50,11 @@ const styles = {
 };
 
 class StatusViewStudent extends PureComponent {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    user: PropTypes.object,
-    onClickButton: PropTypes.func,
-  };
-
-  onPressButton = () => {
-    // Change parent state (user)
+  changeStatus = () => {
     let newStatus = this.props.user.status === 'lost' ? 'neutral' : 'lost';
-    this.props.onClickButton(newStatus);
+    this.props.saveStatus(newStatus);
+    saveUserStatusRep(this.props.user._id, newStatus)
+      .catch(err => console.error(err.message));
   };
 
   render() {
@@ -77,7 +75,7 @@ class StatusViewStudent extends PureComponent {
               variant="fab"
               color={this.props.user.status === 'lost' ? 'primary' : 'secondary'}
               style={styles.stopButton}
-              onClick={this.onPressButton}>
+              onClick={this.changeStatus}>
               {this.props.user.status === 'lost' ? <OkIcon style={styles.stopIcon}/> : <StopIcon style={styles.stopIcon}/>}
             </Button>
           </Tooltip>
@@ -112,5 +110,5 @@ class StatusViewStudent extends PureComponent {
 
 export default connect(
   state => ({ user: state.user }),
-  dispatch => ({})
+  dispatch => ({ saveStatus: status => dispatch(saveStatus(status)) })
 )(withStyles(styles)(StatusViewStudent));

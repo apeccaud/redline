@@ -1,14 +1,10 @@
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui';
 
 import StatusViewStudent from './StatusViewStudent';
 import StatusViewTeacher from './StatusViewTeacher';
 import socket from '../services/sockets';
-import {
-  getUser as getUserRep,
-  saveUserStatus as saveUserStatusRep,
-} from '../repository/users.repository';
+import { getUser as getUserRep } from '../repository/users.repository';
 
 
 const styles = {
@@ -22,10 +18,6 @@ const styles = {
 };
 
 class Content extends PureComponent {
-  static propTypes = {
-    classes: PropTypes.object.isRequired
-  };
-
   state = {
     user: {},
   };
@@ -57,22 +49,12 @@ class Content extends PureComponent {
       .catch(err => console.error(err.message));
   }
 
-  changeStatus = (status) => {
-    let user = this.state.user;
-    this.setState({
-      user: { ...user, status },
-    }, () => {
-      saveUserStatusRep(this.state.user._id, this.state.user.status)
-        .catch(err => console.error(err.message));
-    });
-  };
-
   getView = () => {
     if (this.state.user.role === 'teacher') {
       return <StatusViewTeacher user={this.state.user}/>
     }
     else if (this.state.user.role === 'student') {
-      return <StatusViewStudent onClickButton={this.changeStatus}/>
+      return <StatusViewStudent />
     }
     else {
       return <div>Veuillez vous connecter</div>
