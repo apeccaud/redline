@@ -1,10 +1,14 @@
-import React, {PureComponent} from 'react';
-import {withStyles} from 'material-ui';
+import React, { PureComponent } from 'react';
+import { withStyles } from 'material-ui';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import Tooltip from 'material-ui/Tooltip';
-import PropTypes from 'prop-types';
-import {Clear as StopIcon, Done as OkIcon, Info as InfoIcon} from 'material-ui-icons';
+import { Clear as StopIcon, Done as OkIcon, Info as InfoIcon } from 'material-ui-icons';
+import { connect } from 'react-redux';
+
+import { saveUserStatus as saveUserStatusRep } from "../repository/users.repository";
+import { saveStatus } from '../redux/user/actionCreators';
+
 
 const styles = {
   centerMe: {
@@ -46,20 +50,14 @@ const styles = {
 };
 
 class StatusViewStudent extends PureComponent {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    user: PropTypes.object,
-    onClickButton: PropTypes.func,
-  };
-
-  onPressButton = () => {
-    // Change parent state (user)
+  changeStatus = () => {
     let newStatus = this.props.user.status === 'lost' ? 'neutral' : 'lost';
-    this.props.onClickButton(newStatus);
+    this.props.saveStatus(newStatus);
+    saveUserStatusRep(this.props.user._id, newStatus)
+      .catch(err => console.error(err.message));
   };
 
   render() {
-
     return (
       <div>
 
@@ -71,16 +69,14 @@ class StatusViewStudent extends PureComponent {
 
         <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
           <Tooltip
-            title={this.props.user.status === 'lost' ? 'J\'ai tout compris' :
-              'J\'ai des difficultés'}
+            title={this.props.user.status === 'lost' ? 'J\'ai tout compris' : 'J\'ai des difficultés'}
             placement="right">
             <Button
               variant="fab"
               color={this.props.user.status === 'lost' ? 'primary' : 'secondary'}
               style={styles.stopButton}
-              onClick={this.onPressButton}>
-              {this.props.user.status === 'lost' ? <OkIcon style={styles.stopIcon}/> :
-                <StopIcon style={styles.stopIcon}/>}
+              onClick={this.changeStatus}>
+              {this.props.user.status === 'lost' ? <OkIcon style={styles.stopIcon}/> : <StopIcon style={styles.stopIcon}/>}
             </Button>
           </Tooltip>
           <div className={this.props.classes.statusText}>
@@ -93,8 +89,7 @@ class StatusViewStudent extends PureComponent {
               variant="button"
               color={this.props.user.status === 'lost' ? 'secondary' : 'primary'}
               className={this.props.classes.statusActualText}>
-              {this.props.user.status === 'lost' ? <span>J'ai des difficultés</span> :
-                <span>J'ai tout compris</span>}
+              {this.props.user.status === 'lost' ? <span>J'ai des difficultés</span> : <span>J'ai tout compris</span>}
             </Typography>
           </div>
         </div>
@@ -113,4 +108,7 @@ class StatusViewStudent extends PureComponent {
   }
 }
 
-export default withStyles(styles)(StatusViewStudent);
+export default connect(
+  state => ({ user: state.user }),
+  dispatch => ({ saveStatus: status => dispatch(saveStatus(status)) })
+)(withStyles(styles)(StatusViewStudent));
