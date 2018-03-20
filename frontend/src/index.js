@@ -8,7 +8,7 @@ import './index.css';
 
 import App from './components/App';
 import store from './store';
-import { saveUser } from './redux/users/actionCreators';
+import { saveUser } from './redux/user/actionCreators';
 import { getUser as getUserRep } from "./repository/users.repository";
 
 // Get user from backend, dispatch in Redux and render App

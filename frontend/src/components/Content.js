@@ -72,7 +72,7 @@ class Content extends PureComponent {
       return <StatusViewTeacher user={this.state.user}/>
     }
     else if (this.state.user.role === 'student') {
-      return <StatusViewStudent user={this.state.user} onClickButton={this.changeStatus}/>
+      return <StatusViewStudent onClickButton={this.changeStatus}/>
     }
     else {
       return <div>Veuillez vous connecter</div>
