@@ -1,10 +1,9 @@
 import React, {PureComponent} from 'react';
 import {withStyles} from 'material-ui';
+import { connect } from 'react-redux';
 
 import StatusViewStudent from './StatusViewStudent';
 import StatusViewTeacher from './StatusViewTeacher';
-import socket from '../services/sockets';
-import { getUser as getUserRep } from '../repository/users.repository';
 
 
 const styles = {
@@ -18,42 +17,11 @@ const styles = {
 };
 
 class Content extends PureComponent {
-  state = {
-    user: {},
-  };
-
-  componentDidMount() {
-    this.getJWTFromUrl();
-    this.getUser(); // Get or redirect
-    socket.on('STATUS_CHANGED', () => {
-      this.getUser();
-    });
-  }
-
-  getJWTFromUrl() {
-    const url = new URL(document.location.href);
-    const jwt = url.searchParams.get("token");
-    if (jwt) {
-      // Process JWT
-      localStorage.setItem('token', jwt);
-    }
-  }
-
-  getUser() {
-    return getUserRep()
-      .then(user => {
-        this.setState({
-          user: user
-        });
-      })
-      .catch(err => console.error(err.message));
-  }
-
   getView = () => {
-    if (this.state.user.role === 'teacher') {
+    if (this.props.user.role === 'teacher') {
       return <StatusViewTeacher />
     }
-    else if (this.state.user.role === 'student') {
+    else if (this.props.user.role === 'student') {
       return <StatusViewStudent />
     }
     else {
@@ -76,4 +44,6 @@ class Content extends PureComponent {
   }
 }
 
-export default withStyles(styles)(Content);
+export default connect(
+  state => ({ user: state.user })
+)(withStyles(styles)(Content));
