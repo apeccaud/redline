@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import socket from '../services/sockets';
 import { resetAllStatus as resetAllStatusRep, getTotalStatus as getTotalStatusRep } from "../repository/users.repository";
 
+import QCMCreateViewTeacher from './QCMCreateViewTeacher';
 
 const styles = {
   mainNumber: {
@@ -17,6 +18,12 @@ const styles = {
   },
   spaceMe: {
     padding: 20
+  },
+  flexOne: {
+    flex: 1,
+  },
+  mainBox: {
+    display: 'flex',
   }
 };
 
@@ -62,32 +69,37 @@ class StatusViewTeacher extends PureComponent {
 
   render() {
     return (
-      <div className={this.props.classes.centerMe}>
+      <div className={this.props.classes.mainBox}>
 
-        <div className={this.props.classes.spaceMe}>
-          <Typography variant="headline">
-            Bienvenue {this.props.user.name}
-          </Typography>
+        <div className={this.props.classes.centerMe + ' ' + this.props.classes.flexOne}>
+
+          <div className={this.props.classes.spaceMe}>
+            <Typography variant="headline">
+              Bienvenue {this.props.user.name}
+            </Typography>
+          </div>
+
+          <div className={this.props.classes.spaceMe}>
+            <span className={this.props.classes.mainNumber}>
+              {this.getSumLostStatus()}
+            </span>
+            <Typography variant="subheading">
+              <span>Élèves n'arrivent plus à suivre votre cours</span>
+            </Typography>
+          </div>
+
+          <div className={this.props.classes.spaceMe}>
+            <Button
+              variant="raised"
+              color="primary"
+              className={this.props.classes.resetButton}
+              onClick={this.onPressResetButton}>
+              Remettre à zero
+            </Button>
+          </div>
         </div>
 
-        <div className={this.props.classes.spaceMe}>
-          <span className={this.props.classes.mainNumber}>
-            {this.getSumLostStatus()}
-          </span>
-          <Typography variant="subheading">
-            <span>Élèves n'arrivent plus à suivre votre cours</span>
-          </Typography>
-        </div>
-
-        <div className={this.props.classes.spaceMe}>
-          <Button
-            variant="raised"
-            color="primary"
-            className={this.props.classes.resetButton}
-            onClick={this.onPressResetButton}>
-            Remettre à zero
-          </Button>
-        </div>
+        <QCMCreateViewTeacher/>
 
       </div>
     )
