@@ -3,6 +3,8 @@ import {withStyles} from 'material-ui';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
+import { findLastActive as findLastActiveRep } from '../repository/questions.repository';
+
 const styles = {
   centerMe: {
     textAlign: 'center',
@@ -31,8 +33,28 @@ const styles = {
 
 class QCMViewStudent extends PureComponent {
 
-  render() {
+  state = {
+    question: null
+  };
 
+  componentDidMount() {
+    findLastActiveRep()
+      .then(question => {
+        this.setState({
+          question: question
+        })
+      }).catch(e => console.error(e));
+  }
+
+  noQuestionView() {
+    return (
+      <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
+        Il n'y a pas de question pour le moment
+      </div>
+    )
+  };
+
+  questionView() {
     return (
       <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
 
@@ -40,7 +62,7 @@ class QCMViewStudent extends PureComponent {
 
           <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
             <Typography variant="headline">
-              Quelle est la couleur du cheval blanc d'Henry IV ?
+              {this.state.question.question}
             </Typography>
           </div>
 
@@ -52,28 +74,28 @@ class QCMViewStudent extends PureComponent {
                 color="primary"
                 size="large"
                 className={this.props.classes.answerButton}>
-                Blanc
+                {this.state.question.goodAnswer}
               </Button>
               <Button
                 variant="raised"
                 color="primary"
                 size="large"
                 className={this.props.classes.answerButton}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed augue iaculis, condimentum odio ac, scelerisque lacus
+                {this.state.question.badAnswer1}
               </Button>
               <Button
                 variant="raised"
                 color="primary"
                 size="large"
                 className={this.props.classes.answerButton}>
-                Gris
+                {this.state.question.badAnswer2}
               </Button>
               <Button
                 variant="raised"
                 color="primary"
                 size="large"
                 className={this.props.classes.answerButton}>
-                Blue
+                {this.state.question.badAnswer3}
               </Button>
             </div>
 
@@ -81,6 +103,14 @@ class QCMViewStudent extends PureComponent {
 
         </div>
 
+      </div>
+    )
+  };
+
+  render() {
+    return (
+      <div>
+        {this.state.question ? this.questionView() : this.noQuestionView()}
       </div>
     )
   }

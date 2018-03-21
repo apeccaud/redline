@@ -24,6 +24,6 @@ module.exports.findLastActive = (req, res) => {
     console.log(questions);
     if (err) return res.status(500).json(err);
     if (!questions || !questions[0].isActive) return res.status(200).send(null);
-    return res.status(200).json(questions);
+    return res.status(200).json(questions[0]);
   });
 };
