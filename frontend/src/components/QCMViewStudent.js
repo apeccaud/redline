@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react';
 import {withStyles} from 'material-ui';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
-import PropTypes from 'prop-types';
 
 const styles = {
   centerMe: {
@@ -31,10 +30,6 @@ const styles = {
 };
 
 class QCMViewStudent extends PureComponent {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    user: PropTypes.object,
-  };
 
   render() {
 
