@@ -47,7 +47,8 @@ module.exports.initialize = async (req, res, next) => {
     req.user = await getOrCreateUser(linkappUser);
     return next();
   } catch (e) {
-    console.log(e);
+    console.error(e);
+    req.user = {};
     return next();
   }
 };

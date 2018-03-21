@@ -19,6 +19,7 @@ const UserSchema = new mongoose.Schema({
   linkappUsername: {
     type: String,
     required: true,
+    unique: true,
   },
 });
 

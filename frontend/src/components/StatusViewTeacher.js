@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {withStyles} from 'material-ui';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import socket from '../services/sockets';
 import { resetAllStatus as resetAllStatusRep, getTotalStatus as getTotalStatusRep } from "../repository/users.repository";
@@ -23,11 +23,6 @@ const styles = {
 class StatusViewTeacher extends PureComponent {
   state = {
     totalStatus: [],
-  };
-
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    user: PropTypes.object,
   };
 
   componentDidMount() {
@@ -59,6 +54,12 @@ class StatusViewTeacher extends PureComponent {
       .catch(err => console.log(err));
   };
 
+  getSumLostStatus = () => {
+    return this.state.totalStatus.reduce((acc, curVal) => {
+      return acc + (curVal === 'lost' ? 1 : 0);
+    }, 0)
+  };
+
   render() {
     return (
       <div className={this.props.classes.centerMe}>
@@ -70,13 +71,10 @@ class StatusViewTeacher extends PureComponent {
         </div>
 
         <div className={this.props.classes.spaceMe}>
-                    <span className={this.props.classes.mainNumber}>
-                        {this.state.totalStatus.reduce((acc, curVal) => {
-                          return acc + (curVal === 'lost' ? 1 : 0);
-                        }, 0)}
-                    </span>
-          <Typography
-            variant="subheading">
+          <span className={this.props.classes.mainNumber}>
+            {this.getSumLostStatus()}
+          </span>
+          <Typography variant="subheading">
             <span>Élèves n'arrivent plus à suivre votre cours</span>
           </Typography>
         </div>
@@ -96,4 +94,6 @@ class StatusViewTeacher extends PureComponent {
   }
 }
 
-export default withStyles(styles)(StatusViewTeacher);
+export default connect(
+  state => ({ user: state.user })
+)(withStyles(styles)(StatusViewTeacher));
