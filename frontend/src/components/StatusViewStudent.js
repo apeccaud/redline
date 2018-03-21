@@ -6,7 +6,6 @@ import Tooltip from 'material-ui/Tooltip';
 import { Clear as StopIcon, Done as OkIcon, Info as InfoIcon } from 'material-ui-icons';
 import { connect } from 'react-redux';
 
-import QCMViewStudent from './QCMViewStudent';
 import { saveUserStatus as saveUserStatusRep } from "../repository/users.repository";
 import { saveStatus } from '../redux/user/actionCreators';
 
@@ -47,9 +46,6 @@ const styles = {
     verticalAlign: 'bottom',
     paddingRight: 5
   },
-  mainBox: {
-    display: 'flex',
-  }
 };
 
 class StatusViewStudent extends PureComponent {
@@ -62,58 +58,52 @@ class StatusViewStudent extends PureComponent {
 
   render() {
     return (
-      <div className={this.props.classes.mainBox}>
+      <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
 
         <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
-
-          <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
-            <Typography variant="headline">
-              Bienvenue {this.props.user.name}
-            </Typography>
-          </div>
-
-          <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
-            <Tooltip
-              title={this.props.user.status === 'lost' ? 'J\'ai tout compris' :
-                'J\'ai des difficultés'}
-              placement="right">
-              <Button
-                variant="fab"
-                color={this.props.user.status === 'lost' ? 'primary' : 'secondary'}
-                style={styles.stopButton}
-                onClick={this.changeStatus}>
-                {this.props.user.status === 'lost' ? <OkIcon style={styles.stopIcon}/> :
-                  <StopIcon style={styles.stopIcon}/>}
-              </Button>
-            </Tooltip>
-            <div className={this.props.classes.statusText}>
-              <Typography
-                className={this.props.classes.statusLabelText}
-                variant="subheading">
-                Statut actuel :
-              </Typography>
-              <Typography
-                variant="button"
-                color={this.props.user.status === 'lost' ? 'secondary' : 'primary'}
-                className={this.props.classes.statusActualText}>
-                {this.props.user.status === 'lost' ? <span>J'ai des difficultés</span> :
-                  <span>J'ai tout compris</span>}
-              </Typography>
-            </div>
-          </div>
-
-          <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
-            <Typography
-              className={this.props.classes.infoText}
-              variant="subheading">
-              <InfoIcon style={styles.infoIcon}/>
-              Appuyer sur le bouton permet de notifer au professeur que vous avez du mal à suivre ou non
-            </Typography>
-          </div>
-
+          <Typography variant="headline">
+            Bienvenue {this.props.user.name}
+          </Typography>
         </div>
 
-        <QCMViewStudent/>
+        <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
+          <Tooltip
+            title={this.props.user.status === 'lost' ? 'J\'ai tout compris' :
+              'J\'ai des difficultés'}
+            placement="right">
+            <Button
+              variant="fab"
+              color={this.props.user.status === 'lost' ? 'primary' : 'secondary'}
+              style={styles.stopButton}
+              onClick={this.changeStatus}>
+              {this.props.user.status === 'lost' ? <OkIcon style={styles.stopIcon}/> :
+                <StopIcon style={styles.stopIcon}/>}
+            </Button>
+          </Tooltip>
+          <div className={this.props.classes.statusText}>
+            <Typography
+              className={this.props.classes.statusLabelText}
+              variant="subheading">
+              Statut actuel :
+            </Typography>
+            <Typography
+              variant="button"
+              color={this.props.user.status === 'lost' ? 'secondary' : 'primary'}
+              className={this.props.classes.statusActualText}>
+              {this.props.user.status === 'lost' ? <span>J'ai des difficultés</span> :
+                <span>J'ai tout compris</span>}
+            </Typography>
+          </div>
+        </div>
+
+        <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
+          <Typography
+            className={this.props.classes.infoText}
+            variant="subheading">
+            <InfoIcon style={styles.infoIcon}/>
+            Appuyer sur le bouton permet de notifer au professeur que vous avez du mal à suivre ou non
+          </Typography>
+        </div>
 
       </div>
     )
