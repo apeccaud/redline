@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {withStyles} from 'material-ui';
 import { connect } from 'react-redux';
 
-import StatusViewStudent from './StatusViewStudent';
+import ViewStudent from './ViewStudent';
 import StatusViewTeacher from './StatusViewTeacher';
 
 
@@ -22,7 +22,7 @@ class Content extends PureComponent {
       return <StatusViewTeacher />
     }
     else if (this.props.user.role === 'student') {
-      return <StatusViewStudent />
+      return <ViewStudent />
     }
     else {
       return <div>Veuillez vous connecter</div>
