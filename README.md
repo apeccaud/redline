@@ -1,4 +1,4 @@
-EBM Boilerplate
+Redline
 ===============
 
 [![Build Status](https://travis-ci.org/EBM-2017-2018/redline.svg?branch=master)](https://travis-ci.org/EBM-2017-2018/redline)
