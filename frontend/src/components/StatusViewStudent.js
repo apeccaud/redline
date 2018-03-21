@@ -81,7 +81,7 @@ class StatusViewStudent extends PureComponent {
                 variant="fab"
                 color={this.props.user.status === 'lost' ? 'primary' : 'secondary'}
                 style={styles.stopButton}
-                onClick={this.onPressButton}>
+                onClick={this.changeStatus}>
                 {this.props.user.status === 'lost' ? <OkIcon style={styles.stopIcon}/> :
                   <StopIcon style={styles.stopIcon}/>}
               </Button>
