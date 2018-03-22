@@ -237,6 +237,35 @@ define({ "api": [
     ]
   },
   {
+    "type": "put",
+    "url": "/questions/deactivate",
+    "title": "Deactivate specific question",
+    "name": "deactivate",
+    "group": "Static_Pages",
+    "description": "<p>Desactive la question dont l'identifiant est fourni</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id de la question à desactiver</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/api/questions/index.js",
+    "groupTitle": "Static_Pages",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/questions/deactivate"
+      }
+    ]
+  },
+  {
     "type": "post",
     "url": "/questions/findLastActive",
     "title": "Find last active question or return null",
