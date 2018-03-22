@@ -30,6 +30,56 @@
   },
   {
     "type": "post",
+    "url": "/questions",
+    "title": "Create a question",
+    "name": "CreateQuestion",
+    "group": "Static_Pages",
+    "description": "<p>Crée une question</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "goodAnswer",
+            "description": "<p>Bonne reponse</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "badAnswer1",
+            "description": "<p>Mauvaise réponse 1</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "badAnswer2",
+            "description": "<p>Mauvaise réponse 2</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "badAnswer3",
+            "description": "<p>Mauvaise réponse 3</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/api/questions/index.js",
+    "groupTitle": "Static_Pages",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/questions"
+      }
+    ]
+  },
+  {
+    "type": "post",
     "url": "/users",
     "title": "Create a user",
     "name": "CreateUser",
@@ -66,6 +116,22 @@
   },
   {
     "type": "get",
+    "url": "/questions",
+    "title": "Get all questions",
+    "name": "GetAllQuestions",
+    "group": "Static_Pages",
+    "description": "<p>Affiche toutes les questions</p>",
+    "version": "0.0.0",
+    "filename": "src/api/questions/index.js",
+    "groupTitle": "Static_Pages",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/questions"
+      }
+    ]
+  },
+  {
+    "type": "get",
     "url": "/users/status",
     "title": "Get all user status",
     "name": "GetAllUserStatus",
@@ -93,31 +159,6 @@
     "sampleRequest": [
       {
         "url": "http://localhost:4000/api/users"
-      }
-    ]
-  },
-  {
-    "type": "get",
-    "url": "/",
-    "title": "Hello World",
-    "name": "GetHome",
-    "group": "Static_Pages",
-    "description": "<p>Cette URL affiche un simple message Hello World</p> <p>Il est possible d'écrire des messages sur plusieurs lignes dans la description.</p>",
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\nHello, World!",
-          "type": "html"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/api/index.js",
-    "groupTitle": "Static_Pages",
-    "sampleRequest": [
-      {
-        "url": "http://localhost:4000/api/"
       }
     ]
   },
@@ -176,6 +217,38 @@
     "sampleRequest": [
       {
         "url": "http://localhost:4000/api/users/:id/status"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/",
+    "title": "Welcome",
+    "name": "Welcome",
+    "group": "Static_Pages",
+    "description": "<p>Cette URL affiche un simple message d'accueil</p>",
+    "version": "0.0.0",
+    "filename": "src/api/index.js",
+    "groupTitle": "Static_Pages",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/questions/findLastActive",
+    "title": "Find last active question or return null",
+    "name": "findLastActive",
+    "group": "Static_Pages",
+    "description": "<p>Find last active question or return null</p>",
+    "version": "0.0.0",
+    "filename": "src/api/questions/index.js",
+    "groupTitle": "Static_Pages",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/questions/findLastActive"
       }
     ]
   },
