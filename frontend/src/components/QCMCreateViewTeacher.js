@@ -8,6 +8,7 @@ import Input from 'material-ui/Input';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import { ToastContainer, toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 import { create as createQuestionRep } from '../repository/questions.repository';
 
@@ -54,6 +55,10 @@ const styles = {
 
 class QCMCreateViewTeacher extends PureComponent {
 
+  static propTypes = {
+    updateActiveQuestion: PropTypes.func.isRequired
+  };
+
   state = {
     question: "",
     goodAnswer: "",
@@ -68,8 +73,9 @@ class QCMCreateViewTeacher extends PureComponent {
       this.state.goodAnswer,
       this.state.badAnswer1,
       this.state.badAnswer2,
-      this.state.badAnswer3
-    ).catch(this.notifyError);
+      this.state.badAnswer3)
+      .then(question => this.props.updateActiveQuestion(question))
+      .catch(this.notifyError);
   };
 
   handleInputChange = (event) => {
