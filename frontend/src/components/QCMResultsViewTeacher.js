@@ -4,6 +4,8 @@ import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 
+import { deactivate as deactivateQuestionRep } from '../repository/questions.repository';
+
 
 const styles = {
   centerMe: {
@@ -31,7 +33,8 @@ const styles = {
 class QCMResultsViewTeacher extends PureComponent {
 
   closeQuestion = () => {
-    // Deactivate question in backend
+    deactivateQuestionRep(this.props.question._id)
+      .catch(err => console.log(err));
     this.props.closeActiveQuestion();
   };
 

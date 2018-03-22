@@ -32,4 +32,14 @@ router.post('/', controler.create);
  */
 router.get('/findLastActive', controler.findLastActive);
 
+/**
+ * @api {put} /questions/deactivate Deactivate specific question
+ * @apiName deactivate
+ * @apiGroup Static Pages
+ * @apiDescription Desactive la question dont l'identifiant est fourni
+ *
+ * @apiParam  {String} id Id de la question à desactiver
+ */
+router.put('/:id/deactivate', controler.deactivate);
+
 module.exports = router;

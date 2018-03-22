@@ -41,7 +41,7 @@ class ViewTeacher extends PureComponent {
         <StatusViewTeacher />
 
         {this.state.activeQuestion ?
-          <QCMResultsViewTeacher closeActiveQuestion={this.closeActiveQuestion}/>
+          <QCMResultsViewTeacher question={this.state.activeQuestion} closeActiveQuestion={this.closeActiveQuestion}/>
         :
           <QCMCreateViewTeacher updateActiveQuestion={this.updateActiveQuestion}/>
         }

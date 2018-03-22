@@ -27,3 +27,19 @@ module.exports.findLastActive = (req, res) => {
     return res.status(200).json(questions[0]);
   });
 };
+
+module.exports.deactivate = (req, res) => {
+  Question.update(
+    { _id: req.params.id },
+    {
+      $set: {
+        isActive: false,
+      },
+    },
+    (err) => {
+      if (err) return res.status(500).json(err);
+      // TODO Emit socket to notify that question changed
+      return res.status(200).json('Success');
+    },
+  );
+};
