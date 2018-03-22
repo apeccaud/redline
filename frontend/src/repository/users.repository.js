@@ -1,6 +1,7 @@
 import request from 'superagent';
 
 import config from '../config';
+import { handleError } from './handleError';
 
 
 export async function resetAllStatus() {
@@ -38,13 +39,3 @@ export async function saveUserStatus(userId, status) {
       .catch(err => handleError(err));
   })
 }
-
-const handleError = (err) => {
-  if (err.status === 401) {
-    const authUrl = err.response.body.authUrl;
-    window.location.replace(
-      `${authUrl}?redirect=${encodeURIComponent(document.location.href)}`
-    );
-  }
-  return Promise.reject(err);
-};
