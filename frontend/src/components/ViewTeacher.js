@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui';
 import StatusViewTeacher from './StatusViewTeacher';
 import QCMCreateViewTeacher from './QCMCreateViewTeacher';
 import QCMResultsViewTeacher from './QCMResultsViewTeacher';
+import {findLastActive as findLastActiveRep} from "../repository/questions.repository";
 
 
 const styles = {
@@ -19,8 +20,18 @@ class ViewTeacher extends PureComponent {
   };
 
   componentWillMount() {
-    // Listen to websockets if active question is created
+    this.findLastActiveQuestion();
+    // TODO Websockets
   }
+
+  findLastActiveQuestion = () => {
+    findLastActiveRep()
+      .then(question => {
+        this.setState({
+          activeQuestion: question,
+        })
+      }).catch(e => console.error(e));
+  };
 
   updateActiveQuestion = (question) => {
     this.setState({

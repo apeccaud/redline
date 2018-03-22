@@ -38,13 +38,18 @@ class QCMViewStudent extends PureComponent {
   };
 
   componentDidMount() {
+    this.findLastActiveQuestion();
+    // TODO Websockets
+  }
+
+  findLastActiveQuestion = () => {
     findLastActiveRep()
       .then(question => {
         this.setState({
           question: question
         })
       }).catch(e => console.error(e));
-  }
+  };
 
   noQuestionView() {
     return (
