@@ -7,6 +7,10 @@ import { Clear as WrongIcon, Done as RightIcon } from 'material-ui-icons';
 import Input from 'material-ui/Input';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
+import { ToastContainer, toast } from 'react-toastify';
+import PropTypes from 'prop-types';
+
+import { create as createQuestionRep } from '../repository/questions.repository';
 
 const styles = {
   centerMe: {
@@ -51,6 +55,40 @@ const styles = {
 
 class QCMCreateViewTeacher extends PureComponent {
 
+  static propTypes = {
+    updateActiveQuestion: PropTypes.func.isRequired
+  };
+
+  state = {
+    question: "",
+    goodAnswer: "",
+    badAnswer1: "",
+    badAnswer2: "",
+    badAnswer3: "",
+  };
+
+  createQuestion = () => {
+    createQuestionRep(
+      this.state.question,
+      this.state.goodAnswer,
+      this.state.badAnswer1,
+      this.state.badAnswer2,
+      this.state.badAnswer3)
+      .then(question => this.props.updateActiveQuestion(question))
+      .catch(this.notifyError);
+  };
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  notifyError = () => toast.error("Veuillez renseigner tous les champs");
+
   render() {
 
     return (
@@ -75,56 +113,61 @@ class QCMCreateViewTeacher extends PureComponent {
                   Intitulé de la question
                 </Typography>
                 <Input
-                  id="question"
+                  name="question"
                   type="text"
                   multiline={true}
                   rowsMax="3"
                   autoFocus={true}
                   className={this.props.classes.questionInput}
+                  onChange={this.handleInputChange}
                 />
               </FormControl>
 
               <FormControl className={this.props.classes.answerInputForm}>
                 <RightIcon/>
                 <Input
-                  id="right-answer"
+                  name="goodAnswer"
                   type="text"
                   className={this.props.classes.answerInput}
                   disableUnderline={true}
                   placeholder="Bonne réponse"
+                  onChange={this.handleInputChange}
                 />
               </FormControl>
               <Divider />
               <FormControl className={this.props.classes.answerInputForm}>
                 <WrongIcon/>
                 <Input
-                  id="wrong-answer"
+                  name="badAnswer1"
                   type="text"
                   className={this.props.classes.answerInput}
                   disableUnderline={true}
                   placeholder="Mauvaise réponse"
+                  onChange={this.handleInputChange}
                 />
               </FormControl>
               <Divider />
               <FormControl className={this.props.classes.answerInputForm}>
                 <WrongIcon/>
                 <Input
-                  id="wrong-answer"
+                  name="badAnswer2"
                   type="text"
                   className={this.props.classes.answerInput}
                   disableUnderline={true}
                   placeholder="Mauvaise réponse"
+                  onChange={this.handleInputChange}
                 />
               </FormControl>
               <Divider />
               <FormControl className={this.props.classes.answerInputForm}>
                 <WrongIcon/>
                 <Input
-                  id="wrong-answer"
+                  name="badAnswer3"
                   type="text"
                   className={this.props.classes.answerInput}
                   disableUnderline={true}
                   placeholder="Mauvaise réponse"
+                  onChange={this.handleInputChange}
                 />
               </FormControl>
 
@@ -132,12 +175,15 @@ class QCMCreateViewTeacher extends PureComponent {
                 variant="raised"
                 color="primary"
                 size="large"
-                className={this.props.classes.LaunchQuestionButton}>
+                className={this.props.classes.LaunchQuestionButton}
+                onClick={this.createQuestion}>
                 Lancer la question
               </Button>
 
             </form>
           </div>
+
+          <ToastContainer />
 
         </Paper>
 
