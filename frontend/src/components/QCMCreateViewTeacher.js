@@ -69,7 +69,7 @@ class QCMCreateViewTeacher extends PureComponent {
       this.state.badAnswer1,
       this.state.badAnswer2,
       this.state.badAnswer3
-    ).catch(err => this.notifyError());
+    ).catch(this.notifyError);
   };
 
   handleInputChange = (event) => {
