@@ -9,12 +9,11 @@ export async function findLastActive() {
     request.get(`${config.remote.host}/api/questions/findLastActive`)
       .set('Authorization', localStorage.getItem('token') || null)
       .then(res => resolve(res.body))
-      .catch(err => handleError(err));
+      .catch(err => handleError(reject, err));
   })
 }
 
 export async function create(question, goodAnswer, badAnswer1, badAnswer2, badAnswer3) {
-  console.log(badAnswer3);
   return new Promise((resolve, reject) => {
     request.post(`${config.remote.host}/api/questions`)
       .set('Authorization', localStorage.getItem('token') || null)
@@ -26,6 +25,6 @@ export async function create(question, goodAnswer, badAnswer1, badAnswer2, badAn
         badAnswer3: badAnswer3,
       })
       .then(res => resolve(res.body))
-      .catch(err => handleError(err));
+      .catch(err => handleError(reject, err));
   })
 }

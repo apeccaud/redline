@@ -7,6 +7,7 @@ import { Clear as WrongIcon, Done as RightIcon } from 'material-ui-icons';
 import Input from 'material-ui/Input';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { create as createQuestionRep } from '../repository/questions.repository';
 
@@ -68,8 +69,7 @@ class QCMCreateViewTeacher extends PureComponent {
       this.state.badAnswer1,
       this.state.badAnswer2,
       this.state.badAnswer3
-    ).then(console.log("Question successfully created"))
-      .catch(err => console.error(err));
+    ).catch(err => this.notifyError());
   };
 
   handleInputChange = (event) => {
@@ -80,6 +80,8 @@ class QCMCreateViewTeacher extends PureComponent {
       [name]: value
     });
   };
+
+  notifyError = () => toast.error("Veuillez renseigner tous les champs");
 
   render() {
 
@@ -174,6 +176,8 @@ class QCMCreateViewTeacher extends PureComponent {
 
             </form>
           </div>
+
+          <ToastContainer />
 
         </Paper>
 
