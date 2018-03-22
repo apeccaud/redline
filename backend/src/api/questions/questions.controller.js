@@ -23,7 +23,7 @@ module.exports.findLastActive = (req, res) => {
   Question.find({}).sort('-createdAt').limit(1).exec((err, questions) => {
     console.log(questions);
     if (err) return res.status(500).json(err);
-    if (!questions || !questions[0].isActive) return res.status(200).send(null);
+    if (!questions[0] || !questions[0].isActive) return res.status(200).send(null);
     return res.status(200).json(questions[0]);
   });
 };
