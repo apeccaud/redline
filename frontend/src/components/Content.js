@@ -3,7 +3,7 @@ import {withStyles} from 'material-ui';
 import { connect } from 'react-redux';
 
 import ViewStudent from './ViewStudent';
-import StatusViewTeacher from './StatusViewTeacher';
+import ViewTeacher from "./ViewTeacher";
 
 
 const styles = {
@@ -19,7 +19,7 @@ const styles = {
 class Content extends PureComponent {
   getView = () => {
     if (this.props.user.role === 'teacher') {
-      return <StatusViewTeacher />
+      return <ViewTeacher />
     }
     else if (this.props.user.role === 'student') {
       return <ViewStudent />

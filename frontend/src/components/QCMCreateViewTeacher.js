@@ -77,10 +77,9 @@ class QCMCreateViewTeacher extends PureComponent {
                 <Input
                   id="question"
                   type="text"
-                  onChange=""
-                  multiline="true"
+                  multiline={true}
                   rowsMax="3"
-                  autoFocus="true"
+                  autoFocus={true}
                   className={this.props.classes.questionInput}
                 />
               </FormControl>
@@ -91,7 +90,7 @@ class QCMCreateViewTeacher extends PureComponent {
                   id="right-answer"
                   type="text"
                   className={this.props.classes.answerInput}
-                  disableUnderline="true"
+                  disableUnderline={true}
                   placeholder="Bonne réponse"
                 />
               </FormControl>
@@ -102,7 +101,7 @@ class QCMCreateViewTeacher extends PureComponent {
                   id="wrong-answer"
                   type="text"
                   className={this.props.classes.answerInput}
-                  disableUnderline="true"
+                  disableUnderline={true}
                   placeholder="Mauvaise réponse"
                 />
               </FormControl>
@@ -113,7 +112,7 @@ class QCMCreateViewTeacher extends PureComponent {
                   id="wrong-answer"
                   type="text"
                   className={this.props.classes.answerInput}
-                  disableUnderline="true"
+                  disableUnderline={true}
                   placeholder="Mauvaise réponse"
                 />
               </FormControl>
@@ -124,7 +123,7 @@ class QCMCreateViewTeacher extends PureComponent {
                   id="wrong-answer"
                   type="text"
                   className={this.props.classes.answerInput}
-                  disableUnderline="true"
+                  disableUnderline={true}
                   placeholder="Mauvaise réponse"
                 />
               </FormControl>
