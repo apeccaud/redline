@@ -23,9 +23,7 @@ function initApp() {
   return getUser()
     .then(() => {
       render();
-      socket.on('STATUS_CHANGED', () => {
-        getUser();
-      });
+      socket.on('STATUS_CHANGED', getUser);
     })
     .catch(err => console.error(err.message));
 }
