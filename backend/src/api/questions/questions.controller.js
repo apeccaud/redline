@@ -1,4 +1,5 @@
 const Question = require('./questions.model');
+const socketServer = require('../../config/sockets');
 
 module.exports = {};
 
@@ -13,6 +14,7 @@ module.exports.create = (req, res) => {
   const question = new Question(req.body);
   question.save((err) => {
     if (err) return res.status(500).json(err);
+    socketServer.emit('QUESTIONS_CHANGED');
     return res.status(201).json(question);
   });
 };
@@ -38,7 +40,7 @@ module.exports.deactivate = (req, res) => {
     },
     (err) => {
       if (err) return res.status(500).json(err);
-      // TODO Emit socket to notify that question changed
+      socketServer.emit('QUESTIONS_CHANGED');
       return res.status(200).json('Success');
     },
   );

@@ -4,6 +4,7 @@ import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
 import { findLastActive as findLastActiveRep } from '../repository/questions.repository';
+import socket from '../services/sockets';
 
 const styles = {
   centerMe: {
@@ -39,7 +40,7 @@ class QCMViewStudent extends PureComponent {
 
   componentDidMount() {
     this.findLastActiveQuestion();
-    // TODO Websockets
+    socket.on('QUESTIONS_CHANGED', this.findLastActiveQuestion);
   }
 
   findLastActiveQuestion = () => {

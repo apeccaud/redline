@@ -5,6 +5,7 @@ import StatusViewTeacher from './StatusViewTeacher';
 import QCMCreateViewTeacher from './QCMCreateViewTeacher';
 import QCMResultsViewTeacher from './QCMResultsViewTeacher';
 import {findLastActive as findLastActiveRep} from "../repository/questions.repository";
+import socket from '../services/sockets';
 
 
 const styles = {
@@ -21,7 +22,7 @@ class ViewTeacher extends PureComponent {
 
   componentWillMount() {
     this.findLastActiveQuestion();
-    // TODO Websockets
+    socket.on('QUESTIONS_CHANGED', this.findLastActiveQuestion);
   }
 
   findLastActiveQuestion = () => {
