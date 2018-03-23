@@ -3,6 +3,7 @@ import {withStyles} from 'material-ui';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
+import {Bar} from 'react-chartjs-2';
 
 import { deactivate as deactivateQuestionRep } from '../repository/questions.repository';
 
@@ -19,7 +20,6 @@ const styles = {
   },
   resultsBox: {
     margin: 'auto',
-    maxWidth: 800,
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -27,10 +27,24 @@ const styles = {
   },
   createQuestionButton: {
     marginTop: 20,
+    marginBottom: 20,
   }
 };
 
 class QCMResultsViewTeacher extends PureComponent {
+
+  state = {
+    data: {
+      labels: ["Réponse 1", "Réponse 2", "Réponse 3", "Réponse 4"],
+      datasets: [{
+        label: "Réponses",
+        backgroundColor: 'rgb(255,120,0)',
+        data: [10, 5, 2, 20],
+      }]
+    }
+  };
+
+  // TODO Proptypes
 
   closeQuestion = () => {
     deactivateQuestionRep(this.props.question._id)
@@ -50,6 +64,8 @@ class QCMResultsViewTeacher extends PureComponent {
               Résultats de la question
             </Typography>
           </div>
+
+          <Bar data={this.state.data} options={{legend: { display: false, },}} />
 
           <div>
             <Button
