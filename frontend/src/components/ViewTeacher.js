@@ -6,11 +6,20 @@ import QCMCreateViewTeacher from './QCMCreateViewTeacher';
 import QCMResultsViewTeacher from './QCMResultsViewTeacher';
 import {findLastActive as findLastActiveRep} from "../repository/questions.repository";
 import socket from '../services/sockets';
+import Typography from 'material-ui/Typography';
+import Paper from 'material-ui/Paper';
 
 
 const styles = {
   mainBox: {
     display: 'flex',
+    marginTop: 20,
+  },
+  spaceMe: {
+    padding: 20,
+  },
+  dashboardBox: {
+    padding: 20,
   }
 };
 
@@ -48,15 +57,23 @@ class ViewTeacher extends PureComponent {
 
   render() {
     return (
-      <div className={this.props.classes.mainBox}>
+      <div className={this.props.classes.dashboardBox}>
 
-        <StatusViewTeacher />
+        <Paper className={this.props.classes.spaceMe}>
+          <Typography variant="headline">
+            Bienvenue PeccoLeBlaireau
+          </Typography>
+        </Paper>
 
-        {this.state.activeQuestion ?
-          <QCMResultsViewTeacher question={this.state.activeQuestion} closeActiveQuestion={this.closeActiveQuestion}/>
-        :
-          <QCMCreateViewTeacher updateActiveQuestion={this.updateActiveQuestion}/>
-        }
+        <div className={this.props.classes.mainBox}>
+          <StatusViewTeacher />
+
+          {this.state.activeQuestion ?
+            <QCMResultsViewTeacher question={this.state.activeQuestion} closeActiveQuestion={this.closeActiveQuestion}/>
+          :
+            <QCMCreateViewTeacher updateActiveQuestion={this.updateActiveQuestion}/>
+          }
+        </div>
 
       </div>
     )

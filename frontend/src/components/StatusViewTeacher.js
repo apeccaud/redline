@@ -3,6 +3,7 @@ import {withStyles} from 'material-ui';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import { connect } from 'react-redux';
+import Paper from 'material-ui/Paper';
 
 import socket from '../services/sockets';
 import { resetAllStatus as resetAllStatusRep, getTotalStatus as getTotalStatusRep } from "../repository/users.repository";
@@ -18,7 +19,11 @@ const styles = {
   spaceMe: {
     padding: 20
   },
-  flexOne: {
+  statusBox: {
+    marginRight: 10,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
     flex: 1,
   },
 };
@@ -65,13 +70,8 @@ class StatusViewTeacher extends PureComponent {
 
   render() {
     return (
-      <div className={this.props.classes.centerMe + ' ' + this.props.classes.flexOne}>
 
-        <div className={this.props.classes.spaceMe}>
-          <Typography variant="headline">
-            Bienvenue {this.props.user.name}
-          </Typography>
-        </div>
+      <Paper className={this.props.classes.statusBox + ' ' + this.props.classes.centerMe}>
 
         <div className={this.props.classes.spaceMe}>
           <span className={this.props.classes.mainNumber}>
@@ -91,7 +91,8 @@ class StatusViewTeacher extends PureComponent {
             Remettre à zero
           </Button>
         </div>
-      </div>
+
+      </Paper>
     )
   }
 }
