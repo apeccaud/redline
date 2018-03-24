@@ -5,6 +5,7 @@ import Typography from 'material-ui/Typography';
 import Tooltip from 'material-ui/Tooltip';
 import { Clear as StopIcon, Done as OkIcon, Info as InfoIcon } from 'material-ui-icons';
 import { connect } from 'react-redux';
+import Paper from 'material-ui/Paper';
 
 import { saveUserStatus as saveUserStatusRep } from "../repository/users.repository";
 import { saveStatus } from '../redux/user/actionCreators';
@@ -46,6 +47,13 @@ const styles = {
     verticalAlign: 'bottom',
     paddingRight: 5
   },
+  statusBox: {
+    marginRight: 10,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    flex: 1,
+  },
 };
 
 class StatusViewStudent extends PureComponent {
@@ -58,13 +66,7 @@ class StatusViewStudent extends PureComponent {
 
   render() {
     return (
-      <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
-
-        <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
-          <Typography variant="headline">
-            Bienvenue {this.props.user.name}
-          </Typography>
-        </div>
+      <Paper className={this.props.classes.statusBox + ' ' + this.props.classes.centerMe}>
 
         <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
           <Tooltip
@@ -105,7 +107,7 @@ class StatusViewStudent extends PureComponent {
           </Typography>
         </div>
 
-      </div>
+      </Paper>
     )
   }
 }

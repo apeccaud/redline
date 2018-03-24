@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import {withStyles} from 'material-ui';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
+import Paper from 'material-ui/Paper';
 
 import { findLastActive as findLastActiveRep } from '../repository/questions.repository';
 import socket from '../services/sockets';
@@ -21,14 +22,11 @@ const styles = {
     flexDirection: 'column',
   },
   questionBox: {
-    margin: 'auto',
-    backgroundColor: '#e0e0e0',
-    borderRadius: 3,
-    maxWidth: 800,
-    height: '100%',
+    marginLeft: 10,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    flex: 1,
   }
 };
 
@@ -55,7 +53,9 @@ class QCMViewStudent extends PureComponent {
   noQuestionView() {
     return (
       <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
-        Il n'y a pas de question pour le moment
+        <Typography variant="headline">
+          Il n'y a pas de question pour le moment
+        </Typography>
       </div>
     )
   };
@@ -63,8 +63,6 @@ class QCMViewStudent extends PureComponent {
   questionView() {
     return (
       <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
-
-        <div className={this.props.classes.questionBox}>
 
           <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
             <Typography variant="headline">
@@ -107,17 +105,15 @@ class QCMViewStudent extends PureComponent {
 
           </div>
 
-        </div>
-
       </div>
     )
   };
 
   render() {
     return (
-      <div>
+      <Paper className={this.props.classes.questionBox}>
         {this.state.question ? this.questionView() : this.noQuestionView()}
-      </div>
+      </Paper>
     )
   }
 }
