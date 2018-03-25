@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import {Bar} from 'react-chartjs-2';
+import PropTypes from 'prop-types';
 
 import { deactivate as deactivateQuestionRep } from '../repository/questions.repository';
 import { getResponses as getResponsesRep } from '../repository/questions.repository';
@@ -54,6 +55,11 @@ const chartOptions = {
 
 class QCMResultsViewTeacher extends PureComponent {
 
+  static propTypes = {
+    question: PropTypes.object.isRequired,
+    closeActiveQuestion: PropTypes.func.isRequired
+  };
+
   state = {
     data: {
       labels: [
@@ -65,8 +71,6 @@ class QCMResultsViewTeacher extends PureComponent {
       datasets: [dataSet]
     }
   };
-
-  // TODO Proptypes
 
   componentDidMount() {
     this.updateResponses();
