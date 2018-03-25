@@ -37,3 +37,12 @@ export async function deactivate(questionId) {
       .catch(err => handleError(reject, err));
   })
 }
+
+export async function getResponses(questionId) {
+  return new Promise((resolve, reject) => {
+    request.get(`${config.remote.host}/api/questions/${questionId}/getResponses`)
+      .set('Authorization', localStorage.getItem('token') || null)
+      .then(res => resolve(res.body))
+      .catch(err => handleError(reject, err));
+  })
+}
