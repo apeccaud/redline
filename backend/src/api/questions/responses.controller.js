@@ -1,5 +1,5 @@
 const Response = require('./responses.model');
-// const socketServer = require('../../config/sockets');
+const socketServer = require('../../config/sockets');
 
 module.exports = {};
 
@@ -25,6 +25,7 @@ module.exports.create = (req, res) => {
         if (err) {
           return res.status(500).json(err);
         }
+        socketServer.emit('RESPONSES_CHANGED', { question: req.params.id });
         return res.status(201).json(response);
       });
     })

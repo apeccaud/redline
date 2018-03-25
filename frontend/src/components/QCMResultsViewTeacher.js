@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 import { deactivate as deactivateQuestionRep } from '../repository/questions.repository';
 import { getResponses as getResponsesRep } from '../repository/questions.repository';
+import socket from "../services/sockets";
 
 
 const styles = {
@@ -74,6 +75,12 @@ class QCMResultsViewTeacher extends PureComponent {
 
   componentDidMount() {
     this.updateResponses();
+
+    socket.on('RESPONSES_CHANGED', (params) => {
+      if (params.question === this.props.question._id) {
+        this.updateResponses();
+      }
+    });
   }
 
   updateResponses() {
