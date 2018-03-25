@@ -19,16 +19,12 @@ const styles = {
   spaceMe: {
     padding: 20
   },
-  flexOne: {
-    flex: 1,
-  },
   questionBox: {
-    margin: 'auto',
-    maxWidth: 800,
-    height: '100%',
+    marginLeft: 10,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    flex: 1,
   },
   answerInputForm: {
     padding: '5px 0px',
@@ -92,102 +88,98 @@ class QCMCreateViewTeacher extends PureComponent {
   render() {
 
     return (
-      <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe + ' ' + this.props.classes.flexOne}>
 
-        <Paper className={this.props.classes.questionBox}>
+     <Paper className={this.props.classes.questionBox + ' ' + this.props.classes.centerMe}>
 
-          <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
-            <Typography variant="headline">
-              Créer une question
-            </Typography>
-          </div>
+        <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
+          <Typography variant="headline">
+            Créer une question
+          </Typography>
+        </div>
 
-          <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
-            <form noValidate autoComplete="off">
+        <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
+          <form noValidate autoComplete="off">
 
-              <FormControl fullWidth>
-                <Typography
-                  className={this.props.classes.questionLabelText}
-                  variant="subheading"
-                  align="left">
-                  Intitulé de la question
-                </Typography>
-                <Input
-                  name="question"
-                  type="text"
-                  multiline={true}
-                  rowsMax="3"
-                  autoFocus={true}
-                  className={this.props.classes.questionInput}
-                  onChange={this.handleInputChange}
-                />
-              </FormControl>
+            <FormControl fullWidth>
+              <Typography
+                className={this.props.classes.questionLabelText}
+                variant="subheading"
+                align="left">
+                Intitulé de la question
+              </Typography>
+              <Input
+                name="question"
+                type="text"
+                multiline={true}
+                rowsMax="3"
+                autoFocus={true}
+                className={this.props.classes.questionInput}
+                onChange={this.handleInputChange}
+              />
+            </FormControl>
 
-              <FormControl className={this.props.classes.answerInputForm}>
-                <RightIcon/>
-                <Input
-                  name="goodAnswer"
-                  type="text"
-                  className={this.props.classes.answerInput}
-                  disableUnderline={true}
-                  placeholder="Bonne réponse"
-                  onChange={this.handleInputChange}
-                />
-              </FormControl>
-              <Divider />
-              <FormControl className={this.props.classes.answerInputForm}>
-                <WrongIcon/>
-                <Input
-                  name="badAnswer1"
-                  type="text"
-                  className={this.props.classes.answerInput}
-                  disableUnderline={true}
-                  placeholder="Mauvaise réponse"
-                  onChange={this.handleInputChange}
-                />
-              </FormControl>
-              <Divider />
-              <FormControl className={this.props.classes.answerInputForm}>
-                <WrongIcon/>
-                <Input
-                  name="badAnswer2"
-                  type="text"
-                  className={this.props.classes.answerInput}
-                  disableUnderline={true}
-                  placeholder="Mauvaise réponse"
-                  onChange={this.handleInputChange}
-                />
-              </FormControl>
-              <Divider />
-              <FormControl className={this.props.classes.answerInputForm}>
-                <WrongIcon/>
-                <Input
-                  name="badAnswer3"
-                  type="text"
-                  className={this.props.classes.answerInput}
-                  disableUnderline={true}
-                  placeholder="Mauvaise réponse"
-                  onChange={this.handleInputChange}
-                />
-              </FormControl>
+            <FormControl className={this.props.classes.answerInputForm}>
+              <RightIcon/>
+              <Input
+                name="goodAnswer"
+                type="text"
+                className={this.props.classes.answerInput}
+                disableUnderline={true}
+                placeholder="Bonne réponse"
+                onChange={this.handleInputChange}
+              />
+            </FormControl>
+            <Divider />
+            <FormControl className={this.props.classes.answerInputForm}>
+              <WrongIcon/>
+              <Input
+                name="badAnswer1"
+                type="text"
+                className={this.props.classes.answerInput}
+                disableUnderline={true}
+                placeholder="Mauvaise réponse"
+                onChange={this.handleInputChange}
+              />
+            </FormControl>
+            <Divider />
+            <FormControl className={this.props.classes.answerInputForm}>
+              <WrongIcon/>
+              <Input
+                name="badAnswer2"
+                type="text"
+                className={this.props.classes.answerInput}
+                disableUnderline={true}
+                placeholder="Mauvaise réponse"
+                onChange={this.handleInputChange}
+              />
+            </FormControl>
+            <Divider />
+            <FormControl className={this.props.classes.answerInputForm}>
+              <WrongIcon/>
+              <Input
+                name="badAnswer3"
+                type="text"
+                className={this.props.classes.answerInput}
+                disableUnderline={true}
+                placeholder="Mauvaise réponse"
+                onChange={this.handleInputChange}
+              />
+            </FormControl>
 
-              <Button
-                variant="raised"
-                color="primary"
-                size="large"
-                className={this.props.classes.LaunchQuestionButton}
-                onClick={this.createQuestion}>
-                Lancer la question
-              </Button>
+            <Button
+              variant="raised"
+              color="primary"
+              className={this.props.classes.LaunchQuestionButton}
+              onClick={this.createQuestion}>
+              Lancer la question
+            </Button>
 
-            </form>
-          </div>
+          </form>
+        </div>
 
-          <ToastContainer />
+        <ToastContainer />
 
-        </Paper>
-
-      </div>
+     </Paper>
     )
   }
 }

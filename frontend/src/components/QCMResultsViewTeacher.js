@@ -18,21 +18,14 @@ const styles = {
   spaceMe: {
     padding: 20
   },
-  flexOne: {
-    flex: 1,
-  },
   resultsBox: {
-    margin: 'auto',
-    height: '100%',
+    marginLeft: 10,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-  },
-  createQuestionButton: {
-    marginTop: 20,
-    marginBottom: 20,
+    flex: 1,
   }
-};
+}
 
 const dataSet = {
   label: "Réponses des élèves",
@@ -116,24 +109,21 @@ class QCMResultsViewTeacher extends PureComponent {
   render() {
 
     return (
-      <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe + ' ' + this.props.classes.flexOne}>
 
-        <Paper className={this.props.classes.resultsBox}>
+        <Paper className={this.props.classes.resultsBox + ' ' + this.props.classes.centerMe}>
 
           <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
             <Typography variant="headline">
               Résultats de la question
             </Typography>
           </div>
-
+      
           <Bar data={this.state.data} options={chartOptions} />
 
-          <div>
+          <div className={this.props.classes.spaceMe}>
             <Button
               variant="raised"
               color="primary"
-              size="large"
-              className={this.props.classes.createQuestionButton}
               onClick={this.closeQuestion}>
               Terminer la question
             </Button>
@@ -141,7 +131,6 @@ class QCMResultsViewTeacher extends PureComponent {
 
         </Paper>
 
-      </div>
     )
   }
 }
