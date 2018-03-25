@@ -1,5 +1,57 @@
 define({ "api": [
   {
+    "type": "post",
+    "url": "/questions/:id/responses/create",
+    "title": "Create a response",
+    "name": "CreateResponse",
+    "group": "Questions",
+    "description": "<p>Crée une réponse</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id de la question</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "answer",
+            "description": "<p>compris dans ['goodAnswer', 'badAnswer1', 'badAnswer2', 'badAnswer3']</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/api/questions/index.js",
+    "groupTitle": "Questions",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/questions/:id/responses/create"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/questions/:id/getResponses",
+    "title": "Get responses for question",
+    "name": "getResponses",
+    "group": "Questions",
+    "description": "<p>Get responses for question</p>",
+    "version": "0.0.0",
+    "filename": "src/api/questions/index.js",
+    "groupTitle": "Questions",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:4000/api/questions/:id/getResponses"
+      }
+    ]
+  },
+  {
     "type": "put",
     "url": "/users/:id/changeStatus",
     "title": "Change status of a user",
@@ -266,7 +318,7 @@ define({ "api": [
     ]
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/questions/findLastActive",
     "title": "Find last active question or return null",
     "name": "findLastActive",
