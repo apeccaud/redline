@@ -37,3 +37,22 @@ export async function deactivate(questionId) {
       .catch(err => handleError(reject, err));
   })
 }
+
+export async function getResponses(questionId) {
+  return new Promise((resolve, reject) => {
+    request.get(`${config.remote.host}/api/questions/${questionId}/getResponses`)
+      .set('Authorization', localStorage.getItem('token') || null)
+      .then(res => resolve(res.body))
+      .catch(err => handleError(reject, err));
+  })
+}
+
+export async function submitResponse(questionId, answer) {
+  return new Promise((resolve, reject) => {
+    request.post(`${config.remote.host}/api/questions/${questionId}/responses/create`)
+      .set('Authorization', localStorage.getItem('token') || null)
+      .send({ answer: answer })
+      .then(res => resolve(res.body))
+      .catch(err => handleError(reject, err));
+  })
+}

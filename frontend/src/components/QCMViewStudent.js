@@ -6,6 +6,7 @@ import Paper from 'material-ui/Paper';
 
 import { findLastActive as findLastActiveRep } from '../repository/questions.repository';
 import socket from '../services/sockets';
+import { submitResponse as submitResponseRep } from '../repository/questions.repository';
 
 const styles = {
   centerMe: {
@@ -50,6 +51,11 @@ class QCMViewStudent extends PureComponent {
       }).catch(e => console.error(e));
   };
 
+  submitResponse = (response) => {
+    submitResponseRep(this.state.question._id, response)
+      .catch(err => console.error(err))
+  };
+
   noQuestionView() {
     return (
       <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
@@ -77,28 +83,32 @@ class QCMViewStudent extends PureComponent {
                 variant="raised"
                 color="primary"
                 size="large"
-                className={this.props.classes.answerButton}>
+                className={this.props.classes.answerButton}
+                onClick={() => this.submitResponse('goodAnswer')}>
                 {this.state.question.goodAnswer}
               </Button>
               <Button
                 variant="raised"
                 color="primary"
                 size="large"
-                className={this.props.classes.answerButton}>
+                className={this.props.classes.answerButton}
+                onClick={() => this.submitResponse('badAnswer1')}>
                 {this.state.question.badAnswer1}
               </Button>
               <Button
                 variant="raised"
                 color="primary"
                 size="large"
-                className={this.props.classes.answerButton}>
+                className={this.props.classes.answerButton}
+                onClick={() => this.submitResponse('badAnswer2')}>
                 {this.state.question.badAnswer2}
               </Button>
               <Button
                 variant="raised"
                 color="primary"
                 size="large"
-                className={this.props.classes.answerButton}>
+                className={this.props.classes.answerButton}
+                onClick={() => this.submitResponse('badAnswer3')}>
                 {this.state.question.badAnswer3}
               </Button>
             </div>
