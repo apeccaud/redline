@@ -2,6 +2,7 @@ const { Router } = require('express');
 
 const router = new Router();
 const controler = require('./questions.controller');
+const controlerResponses = require('./responses.controller');
 
 /**
  * @api {get} /questions Get all questions
@@ -25,7 +26,7 @@ router.get('/', controler.findAll);
 router.post('/', controler.create);
 
 /**
- * @api {post} /questions/findLastActive Find last active question or return null
+ * @api {get} /questions/findLastActive Find last active question or return null
  * @apiName findLastActive
  * @apiGroup Static Pages
  * @apiDescription Find last active question or return null
@@ -41,5 +42,24 @@ router.get('/findLastActive', controler.findLastActive);
  * @apiParam  {String} id Id de la question à desactiver
  */
 router.put('/:id/deactivate', controler.deactivate);
+
+/**
+ * @api {get} /questions/:id/getResponses Get responses for question
+ * @apiName getResponses
+ * @apiGroup Questions
+ * @apiDescription Get responses for question
+ */
+router.get('/:id/getResponses', controlerResponses.getResponses);
+
+/**
+ * @api {post} /questions/:id/responses/create Create a response
+ * @apiName CreateResponse
+ * @apiGroup Questions
+ * @apiDescription Crée une réponse
+ *
+ * @apiParam  {String} id id de la question
+ * @apiParam  {String} answer compris dans ['goodAnswer', 'badAnswer1', 'badAnswer2', 'badAnswer3']
+ */
+router.post('/:id/responses/create', controlerResponses.create);
 
 module.exports = router;

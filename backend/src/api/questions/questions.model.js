@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ResponseSchema } = require('./responses.model');
 
 const QuestionSchema = new mongoose.Schema({
   question: {
@@ -25,6 +26,7 @@ const QuestionSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  responses: [ResponseSchema],
 }, {
   timestamps: true,
 });
