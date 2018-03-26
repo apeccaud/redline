@@ -16,10 +16,9 @@ const createNewUserFromLinkapp = async (linkappUser) => {
   return user;
 };
 
-const getOrCreateUser = async (linkappUser) => {
-  return await User.findOne({ linkappUsername: linkappUser.username })
+const getOrCreateUser = async linkappUser =>
+  await User.findOne({ linkappUsername: linkappUser.username })
     || createNewUserFromLinkapp(linkappUser);
-};
 
 const getUpdatedToken = (authHeader) => {
   const checkTokenUrl = `${config.authUrl}/api/checkandrefreshtoken`;
