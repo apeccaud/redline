@@ -3,7 +3,7 @@ import {withStyles} from 'material-ui';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import {FormControl} from 'material-ui/Form';
-import { Clear as WrongIcon, Done as RightIcon } from 'material-ui-icons';
+import { Done as RightIcon } from 'material-ui-icons';
 import Input from 'material-ui/Input';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
@@ -25,6 +25,11 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     flex: 1,
+  },
+  '@media (max-width: 600px)': {
+    questionBox: {
+      marginLeft: 0,
+    }
   },
   answerInputForm: {
     padding: '5px 0px',
@@ -89,7 +94,7 @@ class QCMCreateViewTeacher extends PureComponent {
 
     return (
 
-     <Paper className={this.props.classes.questionBox + ' ' + this.props.classes.centerMe}>
+     <Paper className={this.props.classes.questionBox + ' ' + this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
 
         <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
           <Typography variant="headline">
@@ -125,43 +130,43 @@ class QCMCreateViewTeacher extends PureComponent {
                 type="text"
                 className={this.props.classes.answerInput}
                 disableUnderline={true}
-                placeholder="Bonne réponse"
+                placeholder="Réponse 1"
                 onChange={this.handleInputChange}
               />
             </FormControl>
             <Divider />
             <FormControl className={this.props.classes.answerInputForm}>
-              <WrongIcon/>
+              <RightIcon/>
               <Input
                 name="badAnswer1"
                 type="text"
                 className={this.props.classes.answerInput}
                 disableUnderline={true}
-                placeholder="Mauvaise réponse"
+                placeholder="Réponse 2"
                 onChange={this.handleInputChange}
               />
             </FormControl>
             <Divider />
             <FormControl className={this.props.classes.answerInputForm}>
-              <WrongIcon/>
+              <RightIcon/>
               <Input
                 name="badAnswer2"
                 type="text"
                 className={this.props.classes.answerInput}
                 disableUnderline={true}
-                placeholder="Mauvaise réponse"
+                placeholder="Réponse 3"
                 onChange={this.handleInputChange}
               />
             </FormControl>
             <Divider />
             <FormControl className={this.props.classes.answerInputForm}>
-              <WrongIcon/>
+              <RightIcon/>
               <Input
                 name="badAnswer3"
                 type="text"
                 className={this.props.classes.answerInput}
                 disableUnderline={true}
-                placeholder="Mauvaise réponse"
+                placeholder="Réponse 4"
                 onChange={this.handleInputChange}
               />
             </FormControl>

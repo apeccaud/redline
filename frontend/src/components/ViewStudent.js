@@ -11,11 +11,18 @@ const styles = {
     display: 'flex',
     marginTop: 20,
   },
+  '@media (max-width: 600px)': {
+    mainBox: {
+      flexDirection: 'column'
+    }
+  },
   spaceMe: {
     padding: 20,
   },
   dashboardBox: {
     padding: 20,
+    maxWidth: 1000,
+    margin: 'auto',
   }
 };
 

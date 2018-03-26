@@ -28,13 +28,19 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     flex: 1,
-  }
+  },
+  '@media (max-width: 600px)': {
+    questionBox: {
+      marginLeft: 0,
+    }
+  },
 };
 
 class QCMViewStudent extends PureComponent {
 
   state = {
-    question: null
+    question: null,
+    selectedAnswer: null,
   };
 
   componentDidMount() {
@@ -52,6 +58,7 @@ class QCMViewStudent extends PureComponent {
   };
 
   submitResponse = (response) => {
+    this.setState({selectedAnswer: response});
     submitResponseRep(this.state.question._id, response)
       .catch(err => console.error(err))
   };
@@ -81,7 +88,7 @@ class QCMViewStudent extends PureComponent {
             <div className={this.props.classes.flexButtons}>
               <Button
                 variant="raised"
-                color="primary"
+                color={this.state.selectedAnswer ==='answer1' ? "secondary" : "primary"}
                 size="large"
                 className={this.props.classes.answerButton}
                 onClick={() => this.submitResponse('goodAnswer')}>
@@ -89,7 +96,7 @@ class QCMViewStudent extends PureComponent {
               </Button>
               <Button
                 variant="raised"
-                color="primary"
+                color={this.state.selectedAnswer ==='answer2' ? "secondary" : "primary"}
                 size="large"
                 className={this.props.classes.answerButton}
                 onClick={() => this.submitResponse('badAnswer1')}>
@@ -97,7 +104,7 @@ class QCMViewStudent extends PureComponent {
               </Button>
               <Button
                 variant="raised"
-                color="primary"
+                color={this.state.selectedAnswer ==='answer3' ? "secondary" : "primary"}
                 size="large"
                 className={this.props.classes.answerButton}
                 onClick={() => this.submitResponse('badAnswer2')}>
@@ -105,7 +112,7 @@ class QCMViewStudent extends PureComponent {
               </Button>
               <Button
                 variant="raised"
-                color="primary"
+                color={this.state.selectedAnswer ==='answer4' ? "secondary" : "primary"}
                 size="large"
                 className={this.props.classes.answerButton}
                 onClick={() => this.submitResponse('badAnswer3')}>
@@ -121,7 +128,7 @@ class QCMViewStudent extends PureComponent {
 
   render() {
     return (
-      <Paper className={this.props.classes.questionBox}>
+      <Paper className={this.props.classes.questionBox + ' ' + this.props.classes.spaceMe}>
         {this.state.question ? this.questionView() : this.noQuestionView()}
       </Paper>
     )
