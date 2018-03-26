@@ -29,7 +29,7 @@ class ViewStudent extends PureComponent {
 
         <Paper className={this.props.classes.spaceMe}>
           <Typography variant="headline">
-            Bienvenue {this.props.user.name}
+            Bienvenue {this.props.user.firstname} {this.props.user.lastname}
           </Typography>
         </Paper>
 
