@@ -18,10 +18,10 @@ router.get('/', controler.findAll);
  * @apiGroup Static Pages
  * @apiDescription Crée une question
  *
- * @apiParam  {String} goodAnswer Bonne reponse
- * @apiParam  {String} badAnswer1 Mauvaise réponse 1
- * @apiParam  {String} badAnswer2 Mauvaise réponse 2
- * @apiParam  {String} badAnswer3 Mauvaise réponse 3
+ * @apiParam  {String} answer1 Réponse 1
+ * @apiParam  {String} answer2 Réponse 2
+ * @apiParam  {String} answer3 Réponse 3
+ * @apiParam  {String} answer4 Réponse 4
  */
 router.post('/', controler.create);
 
@@ -58,7 +58,7 @@ router.get('/:id/getResponses', controlerResponses.getResponses);
  * @apiDescription Crée une réponse
  *
  * @apiParam  {String} id id de la question
- * @apiParam  {String} answer compris dans ['goodAnswer', 'badAnswer1', 'badAnswer2', 'badAnswer3']
+ * @apiParam  {String} answer compris dans ['answer1', 'answer2', 'answer3', 'answer4']
  */
 router.post('/:id/responses/create', controlerResponses.create);
 
