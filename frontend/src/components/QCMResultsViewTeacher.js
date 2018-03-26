@@ -24,7 +24,12 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     flex: 1,
-  }
+  },
+  '@media (max-width: 600px)': {
+    resultsBox: {
+      marginLeft: 0,
+    }
+  },
 };
 
 const dataSet = {
@@ -110,7 +115,7 @@ class QCMResultsViewTeacher extends PureComponent {
 
     return (
 
-        <Paper className={this.props.classes.resultsBox + ' ' + this.props.classes.centerMe}>
+        <Paper className={this.props.classes.resultsBox + ' ' + this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
 
           <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
             <Typography variant="headline">

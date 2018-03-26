@@ -54,6 +54,12 @@ const styles = {
     justifyContent: 'center',
     flex: 1,
   },
+  '@media (max-width: 600px)': {
+    statusBox: {
+      marginRight: 0,
+      marginBottom: 20,
+    }
+  },
 };
 
 class StatusViewStudent extends PureComponent {
@@ -66,7 +72,7 @@ class StatusViewStudent extends PureComponent {
 
   render() {
     return (
-      <Paper className={this.props.classes.statusBox + ' ' + this.props.classes.centerMe}>
+      <Paper className={this.props.classes.statusBox + ' ' + this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
 
         <div className={this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
           <Tooltip
@@ -93,7 +99,7 @@ class StatusViewStudent extends PureComponent {
               color={this.props.user.status === 'lost' ? 'secondary' : 'primary'}
               className={this.props.classes.statusActualText}>
               {this.props.user.status === 'lost' ? <span>J'ai des difficultés</span> :
-                <span>J'ai tout compris</span>}
+                <span>J'arrive à suivre</span>}
             </Typography>
           </div>
         </div>

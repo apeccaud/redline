@@ -25,6 +25,12 @@ const styles = {
     justifyContent: 'center',
     flex: 1,
   },
+  '@media (max-width: 600px)': {
+    statusBox: {
+      marginRight: 0,
+      marginBottom: 20,
+    }
+  },
 };
 
 class StatusViewTeacher extends PureComponent {
@@ -70,7 +76,7 @@ class StatusViewTeacher extends PureComponent {
   render() {
     return (
 
-      <Paper className={this.props.classes.statusBox + ' ' + this.props.classes.centerMe}>
+      <Paper className={this.props.classes.statusBox + ' ' + this.props.classes.centerMe + ' ' + this.props.classes.spaceMe}>
 
         <div className={this.props.classes.spaceMe}>
           <span className={this.props.classes.mainNumber}>
