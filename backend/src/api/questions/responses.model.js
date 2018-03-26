@@ -13,7 +13,7 @@ const ResponseSchema = new mongoose.Schema({
   },
   answer: {
     type: String,
-    enum: ['goodAnswer', 'badAnswer1', 'badAnswer2', 'badAnswer3'],
+    enum: ['answer1', 'answer2', 'answer3', 'answer4'],
     required: true,
   },
 }, {

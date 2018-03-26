@@ -13,16 +13,16 @@ export async function findLastActive() {
   })
 }
 
-export async function create(question, goodAnswer, badAnswer1, badAnswer2, badAnswer3) {
+export async function create(question, answer1, answer2, answer3, answer4) {
   return new Promise((resolve, reject) => {
     request.post(`${config.remote.host}/api/questions`)
       .set('Authorization', localStorage.getItem('token') || null)
       .send({
         question: question,
-        goodAnswer: goodAnswer,
-        badAnswer1: badAnswer1,
-        badAnswer2: badAnswer2,
-        badAnswer3: badAnswer3,
+        answer1: answer1,
+        answer2: answer2,
+        answer3: answer3,
+        answer4: answer4,
       })
       .then(res => resolve(res.body))
       .catch(err => handleError(reject, err));

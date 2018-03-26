@@ -5,19 +5,19 @@ const QuestionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  goodAnswer: {
+  answer1: {
     type: String,
     required: true,
   },
-  badAnswer1: {
+  answer2: {
     type: String,
     required: true,
   },
-  badAnswer2: {
+  answer3: {
     type: String,
     required: true,
   },
-  badAnswer3: {
+  answer4: {
     type: String,
     required: true,
   },

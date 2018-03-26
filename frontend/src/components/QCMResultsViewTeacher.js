@@ -25,7 +25,7 @@ const styles = {
     justifyContent: 'center',
     flex: 1,
   }
-}
+};
 
 const dataSet = {
   label: "Réponses des élèves",
@@ -57,10 +57,10 @@ class QCMResultsViewTeacher extends PureComponent {
   state = {
     data: {
       labels: [
-        this.props.question.goodAnswer,
-        this.props.question.badAnswer1,
-        this.props.question.badAnswer2,
-        this.props.question.badAnswer3,
+        this.props.question.answer1,
+        this.props.question.answer2,
+        this.props.question.answer3,
+        this.props.question.answer4,
       ],
       datasets: [dataSet]
     }
@@ -80,10 +80,10 @@ class QCMResultsViewTeacher extends PureComponent {
     getResponsesRep(this.props.question._id)
       .then(responses => {
         return responses.reduce((acc, curVal) => {
-          if (curVal.answer === 'goodAnswer') return [acc[0] += 1, acc[1], acc[2], acc[3]];
-          else if (curVal.answer === 'badAnswer1') return [acc[0], acc[1] += 1, acc[2], acc[3]];
-          else if (curVal.answer === 'badAnswer2') return [acc[0], acc[1], acc[2] += 1, acc[3]];
-          else if (curVal.answer === 'badAnswer3') return [acc[0], acc[1], acc[2], acc[3] += 1];
+          if (curVal.answer === 'answer1') return [acc[0] += 1, acc[1], acc[2], acc[3]];
+          else if (curVal.answer === 'answer2') return [acc[0], acc[1] += 1, acc[2], acc[3]];
+          else if (curVal.answer === 'answer3') return [acc[0], acc[1], acc[2] += 1, acc[3]];
+          else if (curVal.answer === 'answer4') return [acc[0], acc[1], acc[2], acc[3] += 1];
           else return acc;
         }, [0, 0, 0, 0]);
       })
@@ -117,7 +117,13 @@ class QCMResultsViewTeacher extends PureComponent {
               Résultats de la question
             </Typography>
           </div>
-      
+
+          <div className={this.props.classes.spaceMe}>
+            <Typography variant="subheading">
+              {this.props.question.question}
+            </Typography>
+          </div>
+
           <Bar data={this.state.data} options={chartOptions} />
 
           <div className={this.props.classes.spaceMe}>

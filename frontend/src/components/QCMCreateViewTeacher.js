@@ -57,19 +57,19 @@ class QCMCreateViewTeacher extends PureComponent {
 
   state = {
     question: "",
-    goodAnswer: "",
-    badAnswer1: "",
-    badAnswer2: "",
-    badAnswer3: "",
+    answer1: "",
+    answer2: "",
+    answer3: "",
+    answer4: "",
   };
 
   createQuestion = () => {
     createQuestionRep(
       this.state.question,
-      this.state.goodAnswer,
-      this.state.badAnswer1,
-      this.state.badAnswer2,
-      this.state.badAnswer3)
+      this.state.answer1,
+      this.state.answer2,
+      this.state.answer3,
+      this.state.answer4)
       .then(question => this.props.updateActiveQuestion(question))
       .catch(this.notifyError);
   };
@@ -121,7 +121,7 @@ class QCMCreateViewTeacher extends PureComponent {
             <FormControl className={this.props.classes.answerInputForm}>
               <RightIcon/>
               <Input
-                name="goodAnswer"
+                name="answer1"
                 type="text"
                 className={this.props.classes.answerInput}
                 disableUnderline={true}
@@ -133,7 +133,7 @@ class QCMCreateViewTeacher extends PureComponent {
             <FormControl className={this.props.classes.answerInputForm}>
               <WrongIcon/>
               <Input
-                name="badAnswer1"
+                name="answer2"
                 type="text"
                 className={this.props.classes.answerInput}
                 disableUnderline={true}
@@ -145,7 +145,7 @@ class QCMCreateViewTeacher extends PureComponent {
             <FormControl className={this.props.classes.answerInputForm}>
               <WrongIcon/>
               <Input
-                name="badAnswer2"
+                name="answer3"
                 type="text"
                 className={this.props.classes.answerInput}
                 disableUnderline={true}
@@ -157,7 +157,7 @@ class QCMCreateViewTeacher extends PureComponent {
             <FormControl className={this.props.classes.answerInputForm}>
               <WrongIcon/>
               <Input
-                name="badAnswer3"
+                name="answer4"
                 type="text"
                 className={this.props.classes.answerInput}
                 disableUnderline={true}

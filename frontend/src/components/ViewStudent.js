@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import { withStyles } from 'material-ui';
+import { connect } from 'react-redux';
 
 import StatusViewStudent from './StatusViewStudent';
 import QCMViewStudent from './QCMViewStudent';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
+
 
 const styles = {
   mainBox: {
@@ -27,18 +29,20 @@ class ViewStudent extends PureComponent {
 
         <Paper className={this.props.classes.spaceMe}>
           <Typography variant="headline">
-            Bienvenue PeccoLeBlaireau
+            Bienvenue {this.props.user.firstname} {this.props.user.lastname}
           </Typography>
         </Paper>
 
         <div className={this.props.classes.mainBox}>
           <StatusViewStudent />
 
-          <QCMViewStudent/>
+          <QCMViewStudent />
         </div>
       </div>
     )
   }
 }
 
-export default withStyles(styles)(ViewStudent);
+export default connect(
+  state => ({ user: state.user })
+)(withStyles(styles)(ViewStudent));
