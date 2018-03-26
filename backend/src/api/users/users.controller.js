@@ -4,102 +4,70 @@ const socketServer = require('../../config/sockets');
 module.exports = {};
 
 module.exports.findAll = (req, res) => {
-  User.find({}, (err, users) => {
-    if (err) {
-      return res.status(500).json(err);
-    }
-    return res.status(200).json(users);
-  });
+  User.find({})
+    .then(users => res.status(200).json(users))
+    .catch(e => res.status(500).json(e));
 };
 
 module.exports.findOne = (req, res) => {
-  User.findOne(
-    { _id: req.params.id },
-    (err, user) => {
-      if (err) {
-        return res.status(500).json(err);
-      }
-      return res.status(200).json(user);
-    },
-  );
+  User.findOne({ _id: req.params.id })
+    .then(user => res.status(200).json(user))
+    .catch(e => res.status(500).json(e));
 };
 
 module.exports.getStatus = (req, res) => {
-  User.findOne(
-    { _id: req.params.id },
-    (err, user) => {
-      if (err) {
-        return res.status(500).json(err);
-      }
-      return res.status(200).json(user.status);
-    },
-  );
+  User.findOne({ _id: req.params.id })
+    .then(user => res.status(200).json(user.status))
+    .catch(e => res.status(500).json(e));
 };
 
 module.exports.create = (req, res) => {
   const user = new User(req.body);
-  user.save((err) => {
-    if (err) {
-      return res.status(500).json(err);
-    }
-    return res.status(201).json(user);
-  });
+  user.save()
+    .then(() => res.status(201).json(user))
+    .catch(e => res.status(500).json(e));
 };
 
 module.exports.changeStatus = (req, res) => {
   User.update(
     { _id: req.params.id },
-    {
-      $set: {
-        status: req.body.status,
-      },
-    },
+    { $set: { status: req.body.status } },
     { runValidators: true },
-    (err) => {
-      if (err) {
-        return res.status(500).json(err);
-      }
+  )
+    .then(() => {
       // Emit socket to notify that status changed
       socketServer.emit('STATUS_CHANGED');
-      return res.status(200).json('Success');
-    },
-  );
+      return res.status(204).end();
+    })
+    .catch(e => res.status(500).json(e));
 };
 
 module.exports.getAllStatus = (req, res) => {
-  User.find({}, (err, users) => {
-    if (err) {
-      return res.status(500).json(err);
-    }
-    const allStatus = users.map(u => u.status);
-    return res.status(200).json(allStatus);
-  });
+  User.find({})
+    .then((users) => {
+      const allStatus = users.map(u => u.status);
+      return res.status(200).json(allStatus);
+    })
+    .catch(e => res.status(500).json(e));
 };
 
 module.exports.resetAllStatus = (req, res) => {
-  User.find({}, (err, users) => {
-    if (err) {
-      return res.status(500).json(err);
-    }
-    const status = users.map((u) => {
-      u.set({ status: 'neutral' });
-      u.save((err1) => {
-        if (err1) {
-          return console.error(err1);
-        }
-        return true;
-      });
-      return u.status;
-    });
-    // Emit socket to notify that status changed
-    socketServer.emit('STATUS_CHANGED');
-    return res.status(200).json(status);
-  });
+  User.update(
+    {},
+    { $set: { status: 'neutral' } },
+    { multi: true },
+  )
+    .then(() => {
+      // Emit socket to notify that status changed
+      socketServer.emit('STATUS_CHANGED');
+      return res.status(204).end();
+    })
+    .catch(e => res.status(500).json(e));
 };
 
 module.exports.getUser = (req, res) => {
-  if (!req.user) {
-    res.status(500).send('No user');
+  if (req.user) {
+    return res.status(200).json(req.user);
   }
-  return res.status(200).json(req.user);
+  return res.status(500).send('No user');
 };
