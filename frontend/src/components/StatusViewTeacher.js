@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react';
 import {withStyles} from 'material-ui';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
-import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 
 import socket from '../services/sockets';
@@ -103,6 +102,4 @@ class StatusViewTeacher extends PureComponent {
   }
 }
 
-export default connect(
-  state => ({ user: state.user })
-)(withStyles(styles)(StatusViewTeacher));
+export default withStyles(styles)(StatusViewTeacher);

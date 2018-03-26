@@ -12,7 +12,8 @@ const getOrCreateUser = async linkappUser => new Promise((resolve, reject) => {
       if (user) resolve(user);
       // Create and save user
       const newUser = new User({
-        name: linkappUser.nom,
+        firstname: linkappUser.prenom,
+        lastname: linkappUser.nom,
         role: linkappUser.role === 'etudiant' ? 'student' : 'teacher',
         linkappUsername: linkappUser.username,
       });

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { withStyles } from 'material-ui';
+import { connect } from 'react-redux';
 
 import StatusViewTeacher from './StatusViewTeacher';
 import QCMCreateViewTeacher from './QCMCreateViewTeacher';
@@ -68,7 +69,7 @@ class ViewTeacher extends PureComponent {
 
         <Paper className={this.props.classes.spaceMe}>
           <Typography variant="headline">
-            Bienvenue PeccoLeBlaireau
+            Bienvenue {this.props.user.firstname} {this.props.user.lastname}
           </Typography>
         </Paper>
 
@@ -87,4 +88,6 @@ class ViewTeacher extends PureComponent {
   }
 }
 
-export default withStyles(styles)(ViewTeacher);
+export default connect(
+  state => ({ user: state.user })
+)(withStyles(styles)(ViewTeacher));

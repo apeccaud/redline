@@ -91,32 +91,32 @@ class QCMViewStudent extends PureComponent {
                 color={this.state.selectedAnswer ==='answer1' ? "secondary" : "primary"}
                 size="large"
                 className={this.props.classes.answerButton}
-                onClick={() => this.submitResponse('goodAnswer')}>
-                {this.state.question.goodAnswer}
+                onClick={() => this.submitResponse('answer1')}>
+                {this.state.question.answer1}
               </Button>
               <Button
                 variant="raised"
                 color={this.state.selectedAnswer ==='answer2' ? "secondary" : "primary"}
                 size="large"
                 className={this.props.classes.answerButton}
-                onClick={() => this.submitResponse('badAnswer1')}>
-                {this.state.question.badAnswer1}
+                onClick={() => this.submitResponse('answer2')}>
+                {this.state.question.answer2}
               </Button>
               <Button
                 variant="raised"
                 color={this.state.selectedAnswer ==='answer3' ? "secondary" : "primary"}
                 size="large"
                 className={this.props.classes.answerButton}
-                onClick={() => this.submitResponse('badAnswer2')}>
-                {this.state.question.badAnswer2}
+                onClick={() => this.submitResponse('answer3')}>
+                {this.state.question.answer3}
               </Button>
               <Button
                 variant="raised"
                 color={this.state.selectedAnswer ==='answer4' ? "secondary" : "primary"}
                 size="large"
                 className={this.props.classes.answerButton}
-                onClick={() => this.submitResponse('badAnswer3')}>
-                {this.state.question.badAnswer3}
+                onClick={() => this.submitResponse('answer4')}>
+                {this.state.question.answer4}
               </Button>
             </div>
 
