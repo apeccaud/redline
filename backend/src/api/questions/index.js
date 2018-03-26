@@ -7,7 +7,7 @@ const controlerResponses = require('./responses.controller');
 /**
  * @api {get} /questions Get all questions
  * @apiName GetAllQuestions
- * @apiGroup Static Pages
+ * @apiGroup Questions
  * @apiDescription Affiche toutes les questions
  */
 router.get('/', controler.findAll);
@@ -15,7 +15,7 @@ router.get('/', controler.findAll);
 /**
  * @api {post} /questions Create a question
  * @apiName CreateQuestion
- * @apiGroup Static Pages
+ * @apiGroup Questions
  * @apiDescription Crée une question
  *
  * @apiParam  {String} answer1 Réponse 1
@@ -28,7 +28,7 @@ router.post('/', controler.create);
 /**
  * @api {get} /questions/findLastActive Find last active question or return null
  * @apiName findLastActive
- * @apiGroup Static Pages
+ * @apiGroup Questions
  * @apiDescription Find last active question or return null
  */
 router.get('/findLastActive', controler.findLastActive);
@@ -36,7 +36,7 @@ router.get('/findLastActive', controler.findLastActive);
 /**
  * @api {put} /questions/deactivate Deactivate specific question
  * @apiName deactivate
- * @apiGroup Static Pages
+ * @apiGroup Questions
  * @apiDescription Desactive la question dont l'identifiant est fourni
  *
  * @apiParam  {String} id Id de la question à desactiver
