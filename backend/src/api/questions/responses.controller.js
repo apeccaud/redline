@@ -1,7 +1,6 @@
 const Response = require('./responses.model');
 const socketServer = require('../../config/sockets');
 
-module.exports = {};
 
 module.exports.getResponses = (req, res) => {
   Response.find({ question: req.params.id })

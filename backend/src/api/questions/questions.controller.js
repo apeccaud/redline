@@ -1,7 +1,6 @@
 const Question = require('./questions.model');
 const socketServer = require('../../config/sockets');
 
-module.exports = {};
 
 module.exports.findAll = (req, res) => {
   Question.find({})

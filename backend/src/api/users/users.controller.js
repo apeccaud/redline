@@ -1,7 +1,6 @@
 const User = require('./users.model');
 const socketServer = require('../../config/sockets');
 
-module.exports = {};
 
 module.exports.findAll = (req, res) => {
   User.find({})
