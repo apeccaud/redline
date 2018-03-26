@@ -21,7 +21,7 @@
             "type": "String",
             "optional": false,
             "field": "answer",
-            "description": "<p>compris dans ['goodAnswer', 'badAnswer1', 'badAnswer2', 'badAnswer3']</p>"
+            "description": "<p>compris dans ['answer1', 'answer2', 'answer3', 'answer4']</p>"
           }
         ]
       }
@@ -94,29 +94,29 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "goodAnswer",
-            "description": "<p>Bonne reponse</p>"
+            "field": "answer1",
+            "description": "<p>Réponse 1</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "badAnswer1",
-            "description": "<p>Mauvaise réponse 1</p>"
+            "field": "answer2",
+            "description": "<p>Réponse 2</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "badAnswer2",
-            "description": "<p>Mauvaise réponse 2</p>"
+            "field": "answer3",
+            "description": "<p>Réponse 3</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "badAnswer3",
-            "description": "<p>Mauvaise réponse 3</p>"
+            "field": "answer4",
+            "description": "<p>Réponse 4</p>"
           }
         ]
       }
