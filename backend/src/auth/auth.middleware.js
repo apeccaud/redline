@@ -9,18 +9,20 @@ const getOrCreateUser = async linkappUser => new Promise((resolve, reject) => {
     { linkappUsername: linkappUser.username },
     (err, user) => {
       if (err) reject(err);
-      if (user) resolve(user);
-      // Create and save user
-      const newUser = new User({
-        firstname: linkappUser.prenom,
-        lastname: linkappUser.nom,
-        role: linkappUser.role === 'etudiant' ? 'student' : 'teacher',
-        linkappUsername: linkappUser.username,
-      });
-      newUser.save((errSave) => {
-        if (errSave) reject(errSave);
-        resolve(newUser);
-      });
+      else if (user) resolve(user);
+      else {
+        // Create and save user
+        const newUser = new User({
+          firstname: linkappUser.prenom,
+          lastname: linkappUser.nom,
+          role: linkappUser.role === 'etudiant' ? 'student' : 'teacher',
+          linkappUsername: linkappUser.username,
+        });
+        newUser.save((errSave) => {
+          if (errSave) reject(errSave);
+          resolve(newUser);
+        });
+      }
     },
   );
 });
