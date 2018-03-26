@@ -44,10 +44,9 @@ module.exports.initialize = async (req, res, next) => {
     const parsedJTW = token.split(' ')[1];
     const linkappUser = jwt.decode(parsedJTW);
     req.user = await getOrCreateUser(linkappUser);
-    return next();
   } catch (e) {
     console.error(e);
     req.user = null;
-    return next();
   }
+  return next();
 };
