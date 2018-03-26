@@ -117,7 +117,13 @@ class QCMResultsViewTeacher extends PureComponent {
               Résultats de la question
             </Typography>
           </div>
-      
+
+          <div className={this.props.classes.spaceMe}>
+            <Typography variant="subheading">
+              {this.props.question.question}
+            </Typography>
+          </div>
+
           <Bar data={this.state.data} options={chartOptions} />
 
           <div className={this.props.classes.spaceMe}>
