@@ -59,9 +59,9 @@ class StatusViewTeacher extends PureComponent {
 
   onPressResetButton = async() => {
     return resetAllStatusRep()
-      .then(status => {
+      .then(() => {
         this.setState({
-          totalStatus: status
+          totalStatus: []
         });
       })
       .catch(err => console.log(err));

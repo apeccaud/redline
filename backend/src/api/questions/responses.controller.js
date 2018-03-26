@@ -1,18 +1,11 @@
 const Response = require('./responses.model');
 const socketServer = require('../../config/sockets');
 
-module.exports = {};
 
 module.exports.getResponses = (req, res) => {
-  Response.find(
-    { question: req.params.id },
-    (err, responses) => {
-      if (err) {
-        return res.status(500).json(err);
-      }
-      return res.status(200).json(responses);
-    },
-  );
+  Response.find({ question: req.params.id })
+    .then(responses => res.status(200).json(responses))
+    .catch(e => res.status(500).json(e));
 };
 
 module.exports.create = (req, res) => {
@@ -20,14 +13,10 @@ module.exports.create = (req, res) => {
   // Remove previous answers from the user and add new one
   Response
     .remove({ question: req.params.id, user: req.user })
+    .then(() => response.save())
     .then(() => {
-      response.save((err) => {
-        if (err) {
-          return res.status(500).json(err);
-        }
-        socketServer.emit('RESPONSES_CHANGED', { question: req.params.id });
-        return res.status(201).json(response);
-      });
+      socketServer.emit('RESPONSES_CHANGED', { question: req.params.id });
+      return res.status(201).json(response);
     })
-    .catch(err => res.status(500).json(err));
+    .catch(e => res.status(500).json(e));
 };
