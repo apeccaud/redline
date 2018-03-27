@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {GridList, Popover, withStyles} from 'material-ui';
 
 import AppIcon from './AppIcon';
-import logo from '../logo.svg'
 
 const styles = theme => ({
   root: {
