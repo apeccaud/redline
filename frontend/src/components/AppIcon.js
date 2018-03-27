@@ -12,10 +12,11 @@ const styles = theme => ({
       borderRadius: 2,
       padding: `calc(${theme.spacing.unit / 2}px - 1px)`,
       cursor: 'pointer'
-    }
+    },
   },
   media: {
-    height: `calc(100% - ${theme.typography.subheading.fontSize}*2)`
+    height: `calc(100% - ${theme.typography.subheading.fontSize}*2)`,
+    backgroundSize: 'contain'
   },
   appName: {
     textAlign: 'center',
