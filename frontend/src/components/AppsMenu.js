@@ -26,32 +26,32 @@ class AppsMenu extends PureComponent {
     {
       name: 'OKLM',
       url: '//oklm.ebm.nymous.io',
-      logo: logo
+      logo: './images/logo-oklm.png'
     },
     {
       name: 'Redline',
       url: '//redline.ebm.nymous.io',
-      logo: logo
+      logo: './images/logo-redline.png'
     },
     {
       name: 'Linkapp',
       url: '//linkapp.ebm.nymous.io',
-      logo: logo
+      logo: './images/logo-linkapp.png'
     },
     {
       name: 'Markus',
       url: '//markus.ebm.nymous.io',
-      logo: logo
+      logo: './images/logo-markus.png'
     },
     {
       name: 'SAGG',
       url: '//sagg.ebm.nymous.io',
-      logo: logo
+      logo: './images/logo-sagg.png'
     },
     {
       name: 'Livecoding',
       url: '//clock-livecoding.ebm.nymous.io',
-      logo: logo
+      logo: './images/logo-clock.png'
     }
   ];
 
