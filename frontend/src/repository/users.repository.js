@@ -4,7 +4,7 @@ import config from '../config';
 import { handleError } from './handleError';
 
 
-export async function resetAllStatus() {
+export function resetAllStatus() {
   return new Promise((resolve, reject) => {
     request.get(`${config.remote.host}/api/users/resetAllStatus`)
       .set('Authorization', localStorage.getItem('token') || null)
@@ -13,7 +13,7 @@ export async function resetAllStatus() {
   })
 }
 
-export async function getTotalStatus() {
+export function getTotalStatus() {
   return new Promise((resolve, reject) => {
     request.get(`${config.remote.host}/api/users/status`)
       .set('Authorization', localStorage.getItem('token') || null)
@@ -22,7 +22,7 @@ export async function getTotalStatus() {
   })
 }
 
-export async function getUser() {
+export function getUser() {
   return new Promise((resolve, reject) => {
     request.get(`${config.remote.host}/api/users/get`)
       .set('Authorization', localStorage.getItem('token') || null)
@@ -31,7 +31,7 @@ export async function getUser() {
   })
 }
 
-export async function saveUserStatus(userId, status) {
+export function saveUserStatus(userId, status) {
   return new Promise((resolve, reject) => {
     request.put(`${config.remote.host}/api/users/${userId}/changeStatus`)
       .set('Authorization', localStorage.getItem('token') || null)
